@@ -7,13 +7,18 @@
 import Combine
 import Foundation
 
-extension WordleFieldView {
+extension WordleGridView {
     class GameState: ObservableObject {
         @Published var chosenWord = ChosenWord("wordlist-german.txt")
         @Published var rows = [FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow()]
         
         var guesses = 0
         var isSolved = false
+        @Published var alreadyGuessed: Set<String> = Set([]) {
+            didSet {
+                print("\(alreadyGuessed)")
+            }
+        }
         
         var alertTitle = ""
         var alertMessage = ""
@@ -34,12 +39,7 @@ extension WordleFieldView {
             rows = [FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow()]
             chosenWord.chooseNewWord()
             guesses = 0
-        }
-        
-        func oneCharacter (input: inout String){
-            if input.count > 1{
-                input = String(input.prefix(1))
-            }
+            alreadyGuessed = Set([])
         }
         
         func checkWord(row: FieldRow){
@@ -47,7 +47,9 @@ extension WordleFieldView {
                 if chosenWord.wordList.contains(row.makeRealWord()){
                     row.locked = true
                     guesses += 1
-                    row.compareWords(chosenWord.characterList)
+                    for char in row.compareWords(chosenWord.characterList) {
+                        alreadyGuessed.insert(char)
+                    }
                     setAlert(row.isSolved)
                 }
             }

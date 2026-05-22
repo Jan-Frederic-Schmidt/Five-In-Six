@@ -30,8 +30,6 @@ struct WordleApp: App {
         }
     }
     
-    @State private var currentLanguage = CurrentLanguage()
-    
     var body: some Scene {
         WindowGroup {
             ContentView()

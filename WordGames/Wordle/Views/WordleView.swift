@@ -21,7 +21,7 @@ struct WordleView: View {
         }
     }
     
-    @State private var wordleGrid = WordleFieldView()
+    @State private var wordleGrid = WordleGridView()
     
     var body: some View {
         NavigationStack{
@@ -34,9 +34,10 @@ struct WordleView: View {
                             .font(.largeTitle)
                             .fontWeight(.black)
                             .padding(.top, 75)
-//                        Text(viewModel.chosenWord.word)
-                        
-                        wordleGrid
+                        //                        Text(viewModel.chosenWord.word)
+                        VStack(spacing: 15){
+                            wordleGrid
+                        }
                     }
                     .padding(.horizontal, 35)
                     .frame(maxWidth: .infinity)

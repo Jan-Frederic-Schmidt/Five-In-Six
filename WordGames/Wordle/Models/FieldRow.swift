@@ -26,8 +26,9 @@ class FieldRow: Identifiable{
     
     //THE FOLLOWING FUNCTION WAS MADE BY AI, SADLY
     
-    func compareWords(_ comLetters: Array<String>) {
+    func compareWords(_ comLetters: Array<String>) -> Array<String> {
         var unmatchedTargetCounts = [String: Int]()
+        var alreadyGuessed = [String]()
 
         // First pass: Mark green (correct position)
         for i in 0..<5 {
@@ -49,8 +50,11 @@ class FieldRow: Identifiable{
                 unmatchedTargetCounts[guess]! -= 1
             } else {
                 fields[i].color = .gray
+                alreadyGuessed.append(guess)
             }
         }
+        
+        return alreadyGuessed
     }
     
     //End of AI
