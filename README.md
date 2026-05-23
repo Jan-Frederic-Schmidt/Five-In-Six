@@ -13,9 +13,10 @@ The usage should be obvious from the app itself. In *Wordle* you have to guess a
 5. Check the word list ✅
 6. Get localization to work
 7. Clean up the code (definitely needed) ✅
-8. Share Wordle instances via ShareLink
-9. Sync with iCloud
-10. Test on a real device
+8. Create a mode, where one can choose (and maybe even import?) words for use themself
+9. Share Wordle instances via ShareLink
+10. Sync with iCloud
+11. Test on a real device
 
 ---
 
