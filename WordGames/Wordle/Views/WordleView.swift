@@ -30,23 +30,19 @@ struct WordleView: View {
                     .ignoresSafeArea()
                 ScrollView{
                     VStack(spacing: 40){
-                        Text("Streak: \(stat.statistic.streak)")
-                            .font(.largeTitle)
+                        
+                        Text("Wordle!")
+                            .font(.system(size: 50))
                             .fontWeight(.black)
-                            .padding(.top, 75)
-                        //                        Text(viewModel.chosenWord.word)
-                        VStack(spacing: 15){
-                            wordleGrid
-                        }
+                            .padding(.top, 45)
+                        
+                        wordleGrid
                     }
                     .padding(.horizontal, 35)
+                    .frame(maxWidth: 515)
                     .frame(maxWidth: .infinity)
                 }
                 .scrollBounceBehavior(.basedOnSize)
-                .navigationTitle("Wordle")
-                .toolbar{
-                    Button("Neues Wort wählen", action: wordleGrid.gameState.resetGame)
-                }
             }
         }
     }

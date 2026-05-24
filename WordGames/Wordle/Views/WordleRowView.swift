@@ -8,10 +8,12 @@
 import Combine
 import SwiftUI
 
-struct WordleFieldView: View {
+struct WordleRowView: View {
     
     @Binding var row: FieldRow
     @FocusState private var focusField: Int?
+    
+    let action: () -> Void
     
     var body: some View {
         HStack{
@@ -23,6 +25,7 @@ struct WordleFieldView: View {
                     .font(.title).bold()
                     .textCase(.uppercase)
                     .autocorrectionDisabled()
+                    .keyboardType(.asciiCapable)
                 //frame styling
                     .frame(maxWidth: 80, maxHeight: 80)
                     .aspectRatio(1/1, contentMode: .fit)
@@ -39,6 +42,9 @@ struct WordleFieldView: View {
                                 }
                             }
                         }
+                    }
+                    .onSubmit {
+                        action()
                     }
             }
         }

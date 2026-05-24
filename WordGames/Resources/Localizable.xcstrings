@@ -1,0 +1,349 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+      "shouldTranslate" : false
+    },
+    "%@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
+    },
+    "%lld" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
+    },
+    "About" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Über die App"
+          }
+        }
+      }
+    },
+    "Already used letters: \n %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bereits genutzte Buchstaben: %@"
+          }
+        }
+      }
+    },
+    "Choose a Color Scheme" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wähle ein Farbschema"
+          }
+        }
+      }
+    },
+    "Choose a Language" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wähle eine Sprache"
+          }
+        }
+      }
+    },
+    "Consecutive Days Played" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tage hintereinander gespielt"
+          }
+        }
+      }
+    },
+    "Dark" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dunkel"
+          }
+        }
+      }
+    },
+    "Delete All Data" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle Daten Löschen"
+          }
+        }
+      }
+    },
+    "Deutsch" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deutsch"
+          }
+        }
+      }
+    },
+    "Device" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gerät"
+          }
+        }
+      }
+    },
+    "English" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "English"
+          }
+        }
+      }
+    },
+    "First Time Played" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erstes Mal Gespielt"
+          }
+        }
+      }
+    },
+    "Forbidden Letters" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbotene Buchstaben"
+          }
+        }
+      }
+    },
+    "Français" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Français"
+          }
+        }
+      }
+    },
+    "Game Rules" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spielregeln"
+          }
+        }
+      }
+    },
+    "Last Time Played" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erstes Mal Gespielt"
+          }
+        }
+      }
+    },
+    "Light" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hell"
+          }
+        }
+      }
+    },
+    "Next round" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nächste Runde"
+          }
+        }
+      }
+    },
+    "Not played yet" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht Gespielt"
+          }
+        }
+      }
+    },
+    "Number of Rounds" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzahl an Runden"
+          }
+        }
+      }
+    },
+    "Number of Tries" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzahl an Versuchen"
+          }
+        }
+      }
+    },
+    "Number of Words who took that many guesses" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzahl an Versuchen, die es gebraucht hat, um das Wort z erraten"
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen"
+          }
+        }
+      }
+    },
+    "ß" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ß"
+          }
+        }
+      }
+    },
+    "Statistics" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statistiken"
+          }
+        }
+      }
+    },
+    "Streak: %lld" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Streak: %lld"
+          }
+        }
+      }
+    },
+    "The chart shows how often it took you how many tries to guess the word. The Y-axis shows the possible number of tries (1-6), while the X-axis shows how often you needed the corresponding number of tries. So, best case you see a big bar at \"1\" and a small bar at \"6\"." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Diagramm zeigt, wie oft du bisher wie viele Versuche gebraucht hast. Die y-Achse zeigt die mögliche Anzahl an Versuchen (1-5) und die x-Achse zeigt, wie oft die entsprechend Anzahl benötigt wurde. Am besten ist also ein großer Balken bei \"1\" und am schlechtesten einer bei \"6\"."
+          }
+        }
+      }
+    },
+    "Times Played" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mal Gespielt"
+          }
+        }
+      }
+    },
+    "WordGames is a shared-source hobby project, and isn't affiliated with Josh Wardle or the New York Times at all. All source code can be found at https://github.com/Jan-Frederic-Schmidt/WordGames  \n\nWordGames © 2026 by Jan Frédéric Schmidt is licensed under CC BY-NC-ND 4.0" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WordGames ist ein shared-source Hobbyprojekt, welches in keiner Weise mit Josh Wardle oder der New York Times assoziiert ist. Sämtlicher Quellcode kann unter https://github.com/Jan-Frederic-Schmidt/WordGames gefunden werden.\n\nWordGames © 2026 by Jan Frédéric Schmidt is licensed under CC BY-NC-ND 4.0"
+          }
+        }
+      }
+    },
+    "Wordle" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wordle"
+          }
+        }
+      }
+    },
+    "Wordle is a now-famous game developed by Josh Wardle and later bought by the New York Times.\n\nThe games main goal is simple: Guess a word by trying six other words. You enter one letter per field, all fields in a row then make up your word. Your word has to be real and part of the same pool of words as the target word. So, if your word isn't being recognized as such, it doesn't meet one of those criteria. \n\nAfterward, the app evaluates your word: A green letter means it is located at the same spot in the target word, an orange letter means the target word does contain it, but not at that spot and a gray letter means it isn't in the target word at all. \n\nYou log your word in by pressing ⏎. You have six tries per target word or else you will lose your streak and the word will be revealed to you. " : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wordle ist ein bekanntes Spiel des Entwicklers Josh Wardle, das 2022 von der New York Times gekauft wurde.\n\nDas Ziel des Spiels ist einfach: Errate ein Wort durch Ausprobieren anderer Wörter. Pro Feld gibst du dazu einen Buchstaben ein, zusammen ergibt eine Zeile dann dein Lösungswort. Deine Lösungswörter müssen echte Wörter sein und sich im selben Pool wie die Zielwörter befinden. Wenn ein Wort also nicht als solches erkannt wird, trifft eines dieser Kriterien nicht zu. \n\nDanach wertet die App dein Lösungswort aus: Ein grauer Hintergrund steht für Buchstaben, die im Zielwort nicht vorkommen. Ein gelber Hintergrund steht für Buchstaben, die im Zielwort an einer anderen Stelle vorkommen, als beim Lösungswort. Und ein grüner Hintergrund steht für Buchstaben, die im Zielwort an der gleichen Stelle vorkommen, wie beim Lösungswort. \n\nBestätigt wird ein Wort, indem du auf ⏎ drückst. Du hast sechs Versuche pro Lösungswort. \n\nViel Spaß!"
+          }
+        }
+      }
+    },
+    "Wordle!" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wordle!"
+          }
+        }
+      }
+    },
+    "Your Streak" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Streak"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.2"
+}

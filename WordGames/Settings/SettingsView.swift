@@ -19,7 +19,7 @@ struct SettingsView: View {
                 NavigationLink{
                     GameRulesView()
                 } label: {
-                    Label("Spielregeln", systemImage: "text.page")
+                    Label("Game Rules", systemImage: "text.page")
                 }
                 
                 Section{
@@ -27,22 +27,22 @@ struct SettingsView: View {
                         ForEach(0..<3){
                             switch $0{
                             case 0:
-                                Text("Gerät")
+                                Text("Device")
                                     .tag($0)
                             case 1:
-                                Text("Hell")
+                                Text("Light")
                                     .tag($0)
                             default:
-                                Text("Dunkel")
+                                Text("Dark")
                                     .tag($0)
                             }
                         }
                     } label: {
-                        Label("Wähle ein Farbscheme aus", systemImage: "paintpalette")
+                        Label("Choose a Color Scheme", systemImage: "paintpalette")
                     }
                     
                     Picker(selection: $languageIdentifier){
-                        Text("Gerät")
+                        Text("Device")
                             .tag("auto")
                         Text("Deutsch")
                             .tag("de")
@@ -51,14 +51,14 @@ struct SettingsView: View {
                         Text("Français")
                             .tag("fr")
                     } label: {
-                        Label("Wähle eine Sprache aus", systemImage: "translate")
+                        Label("Choose a Language", systemImage: "translate")
                     }
                     
                     Button(role: .destructive){
                         UserDefaults.standard.removeObject(forKey: "Statistic")
                         stat.statistic = getStatistic()
                     } label: {
-                        Label("Alle Daten löschen", systemImage: "trash")
+                        Label("Delete All Data", systemImage: "trash")
                             .foregroundStyle(.red)
                     }
                 }
@@ -67,12 +67,12 @@ struct SettingsView: View {
                     NavigationLink {
                         AboutView()
                     } label: {
-                        Label("Über die App", systemImage: "info.circle")
+                        Label("About", systemImage: "info.circle")
                     }
                 }
             }
             .foregroundStyle(.primary)
-            .navigationTitle("Einstellungen")
+            .navigationTitle("Settings")
         }
     }
 }

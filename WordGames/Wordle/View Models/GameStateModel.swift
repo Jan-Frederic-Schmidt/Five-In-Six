@@ -14,11 +14,7 @@ extension WordleGridView {
         
         var guesses = 0
         var isSolved = false
-        @Published var alreadyGuessed: Set<String> = Set([]) {
-            didSet {
-                print("\(alreadyGuessed)")
-            }
-        }
+        @Published var alreadyGuessed: Set<String> = Set([])
         
         var alertTitle = ""
         var alertMessage = ""

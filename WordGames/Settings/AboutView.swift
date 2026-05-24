@@ -16,9 +16,9 @@ struct AboutView: View {
                         .font(.largeTitle).bold()
                     
                     VStack(alignment: .leading, spacing: 15) {
-                        Text("Über die App")
+                        Text("About")
                             .font(.title).bold()
-                        Text("WordGames ist ein shared-source Hobbyprojekt, welches in keiner Weise mit Josh Wardle oder der New York Times assoziiert ist. Sämtlicher Quellcode kann unter https://github.com/Jan-Frederic-Schmidt/WordGames gefunden werden.\n\nWordGames © 2026 by Jan Frédéric Schmidt is licensed under CC BY-NC-ND 4.0")
+                        Text("WordGames is a shared-source hobby project, and isn't affiliated with Josh Wardle or the New York Times at all. All source code can be found at https://github.com/Jan-Frederic-Schmidt/WordGames  \n\nWordGames © 2026 by Jan Frédéric Schmidt is licensed under CC BY-NC-ND 4.0")
                     }
                 }
             }

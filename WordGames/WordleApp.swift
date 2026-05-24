@@ -37,4 +37,6 @@ struct WordleApp: App {
                 .environment(\.locale, currentLocale)
         }
     }
+    
+    
 }

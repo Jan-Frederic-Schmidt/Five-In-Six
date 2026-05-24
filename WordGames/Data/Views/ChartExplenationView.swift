@@ -10,7 +10,7 @@ import SwiftUI
 struct ChartExplanationView: View {
     var body: some View {
                 ScrollView{
-                    Text("Das Diagramm zeigt, wie oft du bisher wie viele Versuche gebraucht hast. Die y-Achse zeigt die mögliche Anzahl an Versuchen (1-5) und die x-Achse zeigt, wie oft die entsprechend Anzahl benötigt wurde. Am besten ist also ein großer Balken bei \"1\" und am schlechtesten einer bei \"6\".")
+                    Text("The chart shows how often it took you how many tries to guess the word. The Y-axis shows the possible number of tries (1-6), while the X-axis shows how often you needed the corresponding number of tries. So, best case you see a big bar at \"1\" and a small bar at \"6\".")
                 }
                 .scrollBounceBehavior(.basedOnSize)
                 .padding()

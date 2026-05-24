@@ -17,14 +17,16 @@ struct ContentView: View {
             
             StatView()
                 .tabItem{
-                    Label("Statistiken", systemImage: "chart.xyaxis.line")
+                    Label("Statistics", systemImage: "chart.xyaxis.line")
                 }
             
             SettingsView()
                 .tabItem{
-                    Label("Einstellungen", systemImage: "gear")
+                    Label("Settings", systemImage: "gear")
                 }
+                .keyboardShortcut(",")
         }
+        .tabViewStyle(.sidebarAdaptable)
     }
 }
 

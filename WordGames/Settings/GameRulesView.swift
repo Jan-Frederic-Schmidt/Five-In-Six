@@ -11,23 +11,23 @@ struct GameRulesView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section("Spielregeln") {
+                Section {
                     Text("""
-                    Wordle ist ein bekanntes Spiel des Entwicklers Josh Wardle, das 2022 von der New York Times gekauft wurde.
+                    Wordle is a now-famous game developed by Josh Wardle and later bought by the New York Times.
                     
-                    Das Ziel des Spiels ist einfach: Errate ein Wort durch Ausprobieren anderer Wörter. Pro Feld gibst du dazu einen Buchstaben ein, zusammen ergibt eine Zeile dann dein Wort. Deine Lösungswörter müssen echte Wörter sein und sich im selben Pool wie die Zielwörter befinden. Wenn ein Wort also nicht als solches erkannt wird, trifft eines dieser Kriterien nicht zu. 
+                    The games main goal is simple: Guess a word by trying six other words. You enter one letter per field, all fields in a row then make up your word. Your word has to be real and part of the same pool of words as the target word. So, if your word isn't being recognized as such, it doesn't meet one of those criteria. 
                     
-                    Danach wertet die App dein Lösungswort auf der Buchstabenebene aus: Ein grauer Hintergrund steht für Buchstaben, die im Zielwort nicht vorkommen. Ein gelber Hintergrund steht für Buchstaben, die im Zielwort an einer anderen Stelle vorkommen, als beim Lösungswort. Und ein grüner Hintergrund steht für Buchstaben, die im Zielwort an der gleichen Stelle vorkommen, wie beim Lösungswort. 
+                    Afterward, the app evaluates your word: A green letter means it is located at the same spot in the target word, an orange letter means the target word does contain it, but not at that spot and a gray letter means it isn't in the target word at all. 
                     
-                    Bestätigt wird ein Wort, indem du auf ⏎ drückst. Du hast sechs Versuche pro Lösungswort. 
+                    You log your word in by pressing ⏎. You have six tries per target word or else you will lose your streak and the word will be revealed to you. 
                     """)
                 }
                 
-                Section("Verbotene Buchstaben") {
+                Section("Forbidden Letters") {
                     Text("ß")
                 }
             }
-            .navigationTitle("Spielregeln")
+            .navigationTitle("Game Rules")
         }
     }
 }
