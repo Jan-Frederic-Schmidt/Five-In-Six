@@ -72,7 +72,7 @@ struct SettingsView: View {
                 }
             }
             .foregroundStyle(.primary)
-            .navigationTitle("Settings")
+            .navigationTitle(LocalizedStringKey("Settings"))
         }
     }
 }

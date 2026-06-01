@@ -34,7 +34,7 @@ struct WordleView: View {
                         Text("Wordle!")
                             .font(.system(size: 50))
                             .fontWeight(.black)
-                            .padding(.top, 45)
+                            .padding(.top, 30)
                         
                         wordleGrid
                     }
@@ -43,6 +43,11 @@ struct WordleView: View {
                     .frame(maxWidth: .infinity)
                 }
                 .scrollBounceBehavior(.basedOnSize)
+            }
+            .onAppear {
+                if wordleGrid.gameState.chosenWord.word.isEmpty {
+                    wordleGrid.gameState.chosenWord.word = wordleGrid.gameState.chosenWord.wordList.randomElement()!
+                }
             }
         }
     }

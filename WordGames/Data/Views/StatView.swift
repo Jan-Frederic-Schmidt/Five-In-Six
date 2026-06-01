@@ -100,11 +100,11 @@ struct StatView: View {
                         .clipShape(.rect(cornerRadius: 20))
                         .shadow(radius: 5)
                     }
-                    .padding(.horizontal)
+                    .padding([.horizontal, .bottom])
                     .frame(maxWidth: 515)
                     .frame(maxWidth: .infinity)
                 }
-                .navigationTitle("Statistics")
+                .navigationTitle(LocalizedStringKey("Statistics"))
             }
         }
     }

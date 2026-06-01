@@ -9,7 +9,7 @@ import SwiftUI
 @main
 struct WordleApp: App {
     @AppStorage("colorScheme") var storedColorScheme = 0
-    @AppStorage("languageIdentifier") var languageIdentifier = "auto"
+    @AppStorage("languageIdentifier") var languageIdentifier = "auto" 
     
     var colorScheme: ColorScheme? {
         switch storedColorScheme{
@@ -22,19 +22,10 @@ struct WordleApp: App {
         }
     }
     
-    var currentLocale: Locale {
-        if languageIdentifier == "auto"{
-            return Locale.current
-        } else {
-            return Locale(identifier: languageIdentifier)
-        }
-    }
-    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(colorScheme)
-                .environment(\.locale, currentLocale)
         }
     }
     

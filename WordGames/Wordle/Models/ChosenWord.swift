@@ -8,22 +8,35 @@
 import Foundation
 import SwiftUI
 
-struct ChosenWord{
-    var wordList: Set<String>
-    var word: String {
+class ChosenWord{
+    
+    @AppStorage("languageIdentifier") var languageIdentifier = "auto"
+    
+     var wordList: Set<String> {
+        if languageIdentifier == "auto" {
+            if let languageCode = Locale.current.language.languageCode?.identifier {
+               return Bundle.main.chooseWord(for: "wordlist", language: languageCode, withLenght: 5)
+            } else {
+               return Bundle.main.chooseWord(for: "wordlist", language: "en", withLenght: 5)
+            }
+        } else {
+           return Bundle.main.chooseWord(for: "wordlist", language: languageIdentifier, withLenght: 5)
+        }
+    }
+    
+    var word = "" {
         didSet{
             characterList = Array(word).convertToStrings()
         }
     }
+    
     var characterList: Array<String>
     
-    init(_ wordlist: String){
-        wordList = Bundle.main.chooseWord(for: wordlist, withLenght: 5)
-        word = wordList.randomElement()!
+    init(_ wordlist: String) {
         characterList = Array(word).convertToStrings()
     }
     
-    mutating func chooseNewWord(){
+    func chooseNewWord(){
         var newWord = wordList.randomElement()!
         while newWord == word{
             newWord = wordList.randomElement()!

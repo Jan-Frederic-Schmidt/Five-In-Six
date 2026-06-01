@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 extension Bundle{
-    func chooseWord(for name: String, withLenght length: Int) -> Set<String>{
-        if let wordlistURL = Bundle.main.url(forResource: name, withExtension: nil){
+    func chooseWord(for name: String, language: String, withLenght length: Int) -> Set<String>{
+        if let wordlistURL = Bundle.main.url(forResource: "\(name)-\(language).txt", withExtension: nil){
             if let wordlist = try? String(contentsOf: wordlistURL, encoding: .utf8) {
                     
                 let allWords = wordlist.components(separatedBy: .newlines)
