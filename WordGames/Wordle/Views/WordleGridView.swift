@@ -52,7 +52,11 @@ struct WordleGridView: View {
                 } message: {
                     Text(gameState.alertMessage)
                 }
-                
+                .onAppear {
+                    if !gameState.chosenWord.wordList.contains(gameState.chosenWord.word) {
+                        gameState.resetGame()
+                    }
+                }
             }
         }
     }

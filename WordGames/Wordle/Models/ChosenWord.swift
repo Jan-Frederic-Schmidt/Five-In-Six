@@ -32,7 +32,7 @@ class ChosenWord{
     
     var characterList: Array<String>
     
-    init(_ wordlist: String) {
+    init() {
         characterList = Array(word).convertToStrings()
     }
     

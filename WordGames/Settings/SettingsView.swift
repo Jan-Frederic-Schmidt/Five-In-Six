@@ -12,12 +12,14 @@ import SwiftUI
 struct SettingsView: View {
     @AppStorage("languageIdentifier") var languageIdentifier = "auto"
     @AppStorage("colorScheme") var storedColorScheme = 0
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         NavigationStack{
             Form{
-                NavigationLink{
+                NavigationLink {
                     GameRulesView()
+                        .background(colorScheme == .light ? .lightBackground : .darkBackground)
                 } label: {
                     Label("Game Rules", systemImage: "text.page")
                 }
@@ -38,20 +40,22 @@ struct SettingsView: View {
                             }
                         }
                     } label: {
-                        Label("Choose a Color Scheme", systemImage: "paintpalette")
+                        Label("Appearance", systemImage: "paintpalette")
                     }
                     
                     Picker(selection: $languageIdentifier){
                         Text("Device")
                             .tag("auto")
-                        Text("Deutsch")
-                            .tag("de")
                         Text("English")
                             .tag("en")
-                        Text("Français")
+                        Text("German")
+                            .tag("de")
+                        Text("French")
                             .tag("fr")
                     } label: {
-                        Label("Choose a Language", systemImage: "translate")
+                            Label("Game Language", systemImage: "translate")
+//                            Text("Note: This will apply in the next round.")
+//                                .font(.caption)
                     }
                     
                     Button(role: .destructive){
@@ -64,7 +68,7 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    NavigationLink {
+                    DisclosureGroup {
                         AboutView()
                     } label: {
                         Label("About", systemImage: "info.circle")
@@ -72,6 +76,8 @@ struct SettingsView: View {
                 }
             }
             .foregroundStyle(.primary)
+            .scrollContentBackground(.hidden)
+            .background(colorScheme == .light ? .lightBackground : .darkBackground)
             .navigationTitle(LocalizedStringKey("Settings"))
         }
     }

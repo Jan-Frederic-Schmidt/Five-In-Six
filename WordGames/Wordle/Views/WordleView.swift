@@ -29,7 +29,7 @@ struct WordleView: View {
                 backgroundColor
                     .ignoresSafeArea()
                 ScrollView{
-                    VStack(spacing: 40){
+                    VStack(spacing: 30){
                         
                         Text("Wordle!")
                             .font(.system(size: 50))

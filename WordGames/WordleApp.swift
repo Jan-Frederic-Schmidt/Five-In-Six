@@ -26,6 +26,7 @@ struct WordleApp: App {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(colorScheme)
+                .fontDesign(.serif)
         }
     }
     

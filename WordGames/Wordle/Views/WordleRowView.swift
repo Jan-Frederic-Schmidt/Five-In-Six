@@ -1,6 +1,6 @@
 //
 //  WordleFieldView.swift
-//  WordGames
+//  WordGames © 2026 by Jan Frédéric Schmidt is licensed under CC BY-NC-ND 4.0
 //
 //  Created by Jan Schmidt on 5/22/26.
 //
@@ -29,7 +29,7 @@ struct WordleRowView: View {
                 //frame styling
                     .frame(maxWidth: 80, maxHeight: 80)
                     .aspectRatio(1/1, contentMode: .fit)
-                    .glassEffect(.regular.tint(row.fields[number].color).interactive(), in: .rect(cornerRadius: 10))
+                    .glassEffect(.regular.tint(row.fields[number].color).interactive(), in: .rect(cornerRadius: 15))
                 //executing code
                     .disabled(row.locked)
                     .onReceive(Just(row.fields[number].guess)){ _ in oneCharacter(input: &row.fields[number].guess) }
@@ -43,9 +43,7 @@ struct WordleRowView: View {
                             }
                         }
                     }
-                    .onSubmit {
-                        action()
-                    }
+                    .onSubmit(action)
             }
         }
     }

@@ -24,40 +24,35 @@ class FieldRow: Identifiable{
     var locked = false
     var isSolved = false
     
-    //THE FOLLOWING FUNCTION WAS MADE BY AI, SADLY
-    
     func compareWords(_ comLetters: Array<String>) -> Array<String> {
-        var unmatchedTargetCounts = [String: Int]()
+        var mutableLetters: [String?] = comLetters
         var alreadyGuessed = [String]()
-
-        // First pass: Mark green (correct position)
+        
         for i in 0..<5 {
-            if comLetters[i] == fields[i].guess {
+            if fields[i].guess == mutableLetters[i] {
                 fields[i].color = .green
-            } else {
-                unmatchedTargetCounts[comLetters[i], default: 0] += 1
+                mutableLetters[i] = nil
             }
         }
-
-        isSolved = fields.allSatisfy { $0.color == .green }
-
-        // Second pass: Mark orange or gray
+            
+            isSolved = mutableLetters.allSatisfy ({ $0 == nil })
+        
         for i in 0..<5 {
-            guard fields[i].color != .green else { continue }
-            let guess = fields[i].guess
-            if let count = unmatchedTargetCounts[guess], count > 0 {
-                fields[i].color = .orange
-                unmatchedTargetCounts[guess]! -= 1
-            } else {
-                fields[i].color = .gray
-                alreadyGuessed.append(guess)
+            if fields[i].color != .green {
+                if mutableLetters.contains(fields[i].guess) {
+                    fields[i].color = .orange
+                    let j = mutableLetters.firstIndex(of: fields[i].guess)!
+                    mutableLetters[j] = nil
+                } else {
+                    fields[i].color = .gray
+                    alreadyGuessed.append(fields[i].guess)
+                }
             }
         }
         
         return alreadyGuessed
     }
     
-    //End of AI
     func makeRealWord() -> String{
         var word = ""
         

@@ -9,7 +9,7 @@ import Foundation
 
 extension WordleGridView {
     class GameState: ObservableObject {
-        @Published var chosenWord = ChosenWord("wordlist-german.txt")
+        @Published var chosenWord = ChosenWord()
         @Published var rows = [FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow()]
         
         var guesses = 0

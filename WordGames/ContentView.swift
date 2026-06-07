@@ -24,7 +24,6 @@ struct ContentView: View {
                 .tabItem{
                     Label("Settings", systemImage: "gear")
                 }
-                .keyboardShortcut(",")
         }
         .tabViewStyle(.sidebarAdaptable)
     }
