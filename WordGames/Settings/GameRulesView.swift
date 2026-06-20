@@ -13,7 +13,7 @@ struct GameRulesView: View {
             List {
                 Section {
                     Text("""
-                    Wordle is a now-famous game developed by Josh Wardle and later bought by the New York Times.
+                    This app is inspired by the now-famous Wordle, developed by Josh Wardle and later bought by the New York Times.
                     
                     The game's main goal is simple: Guess a word by trying six other words. You enter one letter per field, all fields in a row then make up your word. Your word has to be real and part of the same pool of words as the target word. So, if your word isn't being recognized as such, it doesn't meet one of those criteria. 
                     

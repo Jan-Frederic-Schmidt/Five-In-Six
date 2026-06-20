@@ -34,11 +34,10 @@ struct WordleView: View {
                         Text("Wordle!")
                             .font(.system(size: 50))
                             .fontWeight(.black)
-                            .padding(.top, 30)
                         
                         wordleGrid
                     }
-                    .padding(.horizontal, 35)
+                    .padding(.horizontal, 20)
                     .frame(maxWidth: 515)
                     .frame(maxWidth: .infinity)
                 }

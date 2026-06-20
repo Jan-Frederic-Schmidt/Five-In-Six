@@ -18,6 +18,7 @@ struct WordleRowView: View {
     var body: some View {
         HStack{
             ForEach(0..<5){number in
+                
                 TextField("", text: $row.fields[number].guess)
                 //text styling
                     .focused($focusField, equals: number)
@@ -29,7 +30,7 @@ struct WordleRowView: View {
                 //frame styling
                     .frame(maxWidth: 80, maxHeight: 80)
                     .aspectRatio(1/1, contentMode: .fit)
-                    .glassEffect(.regular.tint(row.fields[number].color).interactive(), in: .rect(cornerRadius: 15))
+                    .glassEffect(.regular.tint(row.fields[number].color), in: .rect(cornerRadius: 10))
                 //executing code
                     .disabled(row.locked)
                     .onReceive(Just(row.fields[number].guess)){ _ in oneCharacter(input: &row.fields[number].guess) }

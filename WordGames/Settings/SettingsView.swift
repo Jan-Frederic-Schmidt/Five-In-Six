@@ -14,6 +14,8 @@ struct SettingsView: View {
     @AppStorage("colorScheme") var storedColorScheme = 0
     @Environment(\.colorScheme) var colorScheme
     
+    @State private var showAlert = false
+    
     var body: some View {
         NavigationStack{
             Form{
@@ -59,8 +61,7 @@ struct SettingsView: View {
                     }
                     
                     Button(role: .destructive){
-                        UserDefaults.standard.removeObject(forKey: "Statistic")
-                        stat.statistic = getStatistic()
+                        showAlert = true
                     } label: {
                         Label("Delete All Data", systemImage: "trash")
                             .foregroundStyle(.red)
@@ -79,6 +80,14 @@ struct SettingsView: View {
             .scrollContentBackground(.hidden)
             .background(colorScheme == .light ? .lightBackground : .darkBackground)
             .navigationTitle(LocalizedStringKey("Settings"))
+            .alert("Do you want to delete all your data?", isPresented: $showAlert) {
+                Button("Delete", role: .destructive) {
+                    UserDefaults.standard.removeObject(forKey: "Statistic")
+                    stat.statistic = getStatistic()
+                }
+            } message: {
+                Text("Warning: This action is irreversible")
+            }
         }
     }
 }

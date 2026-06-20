@@ -19,24 +19,11 @@ struct WordleGridView: View {
             Text(gameState.chosenWord.word)
             
             HStack {
-                Button {
-                    // share the wordle instance
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
-                }
-                .buttonStyle(.glassProminent).tint(.green)
-                
                 Spacer()
                 
                 Text("Streak: \(stat.statistic.streak)")
                 
                 Spacer()
-                
-                Button(action: gameState.resetGame) {
-                    Image(systemName: "arrow.trianglehead.counterclockwise")
-                        .foregroundStyle(.white)
-                }
-                .buttonStyle(.glassProminent).tint(.red)
             }
             .font(.title).bold()
             .buttonBorderShape(.circle)
@@ -56,6 +43,24 @@ struct WordleGridView: View {
                     if !gameState.chosenWord.wordList.contains(gameState.chosenWord.word) {
                         gameState.resetGame()
                     }
+                }
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button(action: gameState.resetGame) {
+                    Image(systemName: "arrow.trianglehead.counterclockwise")
+                        .foregroundStyle(.white)
+                        .bold()
+                }
+                .buttonStyle(.glassProminent).tint(.red)
+            }
+            
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    // share the wordle instance
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
                 }
             }
         }

@@ -4,8 +4,10 @@
 //
 //  Created by Jan Schmidt on 5/14/26.
 //
+
 import Combine
 import Foundation
+import SwiftUI
 
 extension WordleGridView {
     class GameState: ObservableObject {
@@ -16,8 +18,8 @@ extension WordleGridView {
         var isSolved = false
         @Published var alreadyGuessed: Set<String> = Set([])
         
-        var alertTitle = ""
-        var alertMessage = ""
+        var alertTitle: LocalizedStringResource = ""
+        var alertMessage: LocalizedStringResource = ""
         var alertAction = { }
         
         func resetGame(){
@@ -40,7 +42,7 @@ extension WordleGridView {
         
         func checkWord(row: FieldRow){
             if !row.fields.contains(where: {$0.guess == ""}){
-                if chosenWord.wordList.contains(row.makeRealWord()){
+                if checkSpelling(row.makeRealWord()){
                     row.locked = true
                     guesses += 1
                     for char in row.compareWords(chosenWord.characterList) {
@@ -53,8 +55,8 @@ extension WordleGridView {
         
         func setAlert(_ isCorrect: Bool) {
             if isCorrect {
-                alertTitle = "Richtig!"
-                alertMessage = "Super, du hast \(chosenWord.word) erraten!"
+                alertTitle = "Correct!"
+                alertMessage = "Great, you guesses \(chosenWord.word.localizedCapitalized)"
                 alertAction = {
                     stat.statistic.streak += 1
                     stat.statistic.timesPlayed += 1
@@ -65,8 +67,8 @@ extension WordleGridView {
                 isSolved = true
             } else {
                 if guesses >= 6 {
-                    alertTitle = "Leider Falsch!"
-                    alertMessage = "Das war leider falsch. Das Wort war \(chosenWord.word)"
+                    alertTitle = "Incorrect!"
+                    alertMessage = "Alas, that was wrong. The word was \(chosenWord.word.localizedCapitalized)"
                     alertAction = {
                         stat.statistic.streak = 0
                         stat.statistic.timesPlayed += 1
@@ -76,6 +78,28 @@ extension WordleGridView {
                     isSolved = true
                 }
             }
+        }
+        
+        func checkSpelling(_ rawWord: String) -> Bool {
+            let word = rawWord.capitalized
+            let checker = UITextChecker()
+            
+            let range = NSRange(location: 0, length: word.utf16.count)
+            
+            var language = ""
+            if chosenWord.languageIdentifier == "auto" {
+                if let languageIdentifer = Locale.current.language.languageCode?.identifier {
+                    language = languageIdentifer
+                } else {
+                    language = "en"
+                }
+            } else {
+                language = chosenWord.languageIdentifier
+            }
+            
+            let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: language)
+            
+            return misspelledRange.location == NSNotFound
         }
     }
 }

@@ -37,16 +37,6 @@ extension Array<Character> {
     }
 }
 
-extension String {
-    func capitalizingFirstLetter() -> String {
-      return prefix(1).uppercased() + self.lowercased().dropFirst()
-    }
-
-    mutating func capitalizeFirstLetter() {
-      self = self.capitalizingFirstLetter()
-    }
-}
-
 extension ShapeStyle where Self == Color{
     static var lightBackground: Color {
         Color(red: 0.969, green: 0.953, blue: 0.855)

@@ -9,19 +9,8 @@ import Foundation
 
 @Observable
 class Statistic: Codable {
-    var lastPlayed: Date? = nil{
-        willSet{
-            if let lastPlayed = self.lastPlayed{
-                if Date.now.timeIntervalSince(lastPlayed) > 86400 && Date.now.timeIntervalSince(lastPlayed) <= 172_800 {
-                    self.consecutiveDays += 1
-                } else {
-                    self.consecutiveDays = 0
-                }
-            }
-        }
-    } //Set when playing a game in resetGame function
+    var lastPlayed: Date? = nil //Set when playing a game in resetGame function
     var firstPlayed: Date? = nil // same as above, but only if it is nil
-    var consecutiveDays = 0 //gotta thing of something
     
     var averageGuesses: Int {
         let mostOftenGuessed = guessSpread.max { a, b in

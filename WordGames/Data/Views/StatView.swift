@@ -30,38 +30,6 @@ struct StatView: View {
                     .ignoresSafeArea()
                 ScrollView {
                     VStack(spacing: 20) {
-                        HStack {
-                            DataCard(data: "\(stat.statistic.timesPlayed)", description: "Times Played", color: .indigo, aspectRatio: 1/1, height: .infinity)
-                            
-                            Spacer()
-
-                            DataCard(data: "\(stat.statistic.streak)", description: "Your Streak", color: .red, aspectRatio: 1/1, height: .infinity)
-                        }
-                        
-                        DataCard(
-                            data: "\(stat.statistic.firstPlayed?.formatted(date: .long, time: .omitted) ?? String(localized: "Not played yet"))",
-                            description: "First Time Played",
-                            color: .green,
-                            aspectRatio: nil,
-                            height: 200
-                        )
-                        
-                        DataCard(
-                            data: "\(stat.statistic.lastPlayed?.formatted(date: .long, time: .omitted) ?? String(localized: "Not played yet"))",
-                            description: "Last Time Played",
-                            color: .orange,
-                            aspectRatio: nil,
-                            height: 200
-                        )
-                        
-                        DataCard(
-                            data: "\(stat.statistic.consecutiveDays)",
-                            description: "Consecutive Days Played",
-                            color: .mint,
-                            aspectRatio: nil,
-                            height: 200
-                        )
-                        
                         Group{
                             if showingExplanation{
                                 ChartExplanationView()
@@ -99,6 +67,30 @@ struct StatView: View {
                         .background(colorScheme == .light ? .white : .black)
                         .clipShape(.rect(cornerRadius: 20))
                         .shadow(radius: 5)
+                        
+                        HStack {
+                            DataCard(data: "\(stat.statistic.timesPlayed)", description: "Times Played", color: .indigo, aspectRatio: 1/1, height: .infinity)
+                            
+                            Spacer()
+
+                            DataCard(data: "\(stat.statistic.streak)", description: "Your Streak", color: .red, aspectRatio: 1/1, height: .infinity)
+                        }
+                        
+                        DataCard(
+                            data: "\(stat.statistic.firstPlayed?.formatted(date: .long, time: .omitted) ?? String(localized: "Not played yet"))",
+                            description: "First Time Played",
+                            color: .green,
+                            aspectRatio: nil,
+                            height: 200
+                        )
+                        
+                        DataCard(
+                            data: "\(stat.statistic.lastPlayed?.formatted(date: .long, time: .omitted) ?? String(localized: "Not played yet"))",
+                            description: "Last Time Played",
+                            color: .orange,
+                            aspectRatio: nil,
+                            height: 200
+                        )
                     }
                     .padding([.horizontal, .bottom])
                     .frame(maxWidth: 515)
