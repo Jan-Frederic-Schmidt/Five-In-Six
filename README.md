@@ -12,12 +12,13 @@ The usage should be obvious from the app itself. In *Wordle* you have to guess a
 4. Create the settings pane ✅
 5. Check the word list ✅
 6. Get localization to work ✅
-7. WWrite the compareWords() function myself
-8. Clean up the code (definitely needed) 
-9. Let users choose "not include this word anymore" when losing a round
-10. Share Wordle instances via ShareLink
-11. Sync with iCloud
-12. Test on a real device
+7. Write the compareWords() function myself ✅
+8. Test on a real device
+9. Clean up the code (definitely needed) 
+10. Let users choose "not include this word anymore" when losing a round
+11. Share Wordle instances via ShareLink
+12. Sync with iCloud
+13. Add time limits if wanted
 
 ---
 
