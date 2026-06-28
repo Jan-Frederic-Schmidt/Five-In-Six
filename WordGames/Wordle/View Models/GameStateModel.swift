@@ -56,7 +56,7 @@ extension WordleGridView {
         func setAlert(_ isCorrect: Bool) {
             if isCorrect {
                 alertTitle = "Correct!"
-                alertMessage = "Great, you guesses \(chosenWord.word.localizedCapitalized)"
+                alertMessage = "Great, you guessed \(chosenWord.word.localizedCapitalized)"
                 alertAction = {
                     stat.statistic.streak += 1
                     stat.statistic.timesPlayed += 1

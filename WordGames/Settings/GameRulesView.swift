@@ -15,7 +15,7 @@ struct GameRulesView: View {
                     Text("""
                     This app is inspired by the now-famous Wordle, developed by Josh Wardle and later bought by the New York Times.
                     
-                    The game's main goal is simple: Guess a word by trying six other words. You enter one letter per field, all fields in a row then make up your word. Your word has to be real and part of the same pool of words as the target word. So, if your word isn't being recognized as such, it doesn't meet one of those criteria. 
+                    The game's main goal is simple: Guess a word by trying six other words. You enter one letter per field, all fields in a row then make up your word. Your word has to be real.
                     
                     Afterward, the app evaluates your word: A green letter means it is located at the same spot in the target word, an orange letter means the target word does contain it, but not at that spot and a gray letter means it isn't in the target word at all. 
                     
@@ -27,7 +27,6 @@ struct GameRulesView: View {
                     Text("ß")
                 }
             }
-            .scrollContentBackground(.hidden)
             .navigationTitle("Game Rules")
         }
     }

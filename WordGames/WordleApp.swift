@@ -9,10 +9,10 @@ import SwiftUI
 @main
 struct WordleApp: App {
     @AppStorage("colorScheme") var storedColorScheme = 0
-    @AppStorage("languageIdentifier") var languageIdentifier = "auto" 
+    @AppStorage("useSerifs") var useSerifs = true
     
     var colorScheme: ColorScheme? {
-        switch storedColorScheme{
+        switch storedColorScheme {
         case 0:
             return nil
         case 1:
@@ -26,7 +26,8 @@ struct WordleApp: App {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(colorScheme)
-                .fontDesign(.serif)
+                .fontDesign(useSerifs ? .serif : .default)
+                .dynamicTypeSize(...DynamicTypeSize.accessibility2)
         }
     }
     

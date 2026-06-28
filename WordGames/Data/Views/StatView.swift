@@ -11,6 +11,7 @@ struct StatView: View {
     
     @State private var showingExplanation = false
     
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     @Environment(\.colorScheme) var colorScheme
     var backgroundColor: Color {
         switch colorScheme {
@@ -51,7 +52,7 @@ struct StatView: View {
                                 .foregroundStyle(Color.accentColor)
                             }
                         }
-                        .frame(maxWidth: .infinity, minHeight: 400)
+                        .frame(maxWidth: .infinity, minHeight: verticalSizeClass == .compact ? 250 : 400)
                         .overlay(alignment: .topTrailing) {
                             Button{
                                 withAnimation{
@@ -93,7 +94,7 @@ struct StatView: View {
                         )
                     }
                     .padding([.horizontal, .bottom])
-                    .frame(maxWidth: 515)
+                    .frame(maxWidth: 650)
                     .frame(maxWidth: .infinity)
                 }
                 .navigationTitle(LocalizedStringKey("Statistics"))

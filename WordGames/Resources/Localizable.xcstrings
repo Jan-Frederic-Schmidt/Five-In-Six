@@ -64,17 +64,6 @@
         }
       }
     },
-    "Consecutive Days Played" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tage hintereinander gespielt"
-          }
-        }
-      }
-    },
     "Correct!" : {
       "localizations" : {
         "de" : {
@@ -205,12 +194,12 @@
         }
       }
     },
-    "Great, you guesses %@" : {
+    "Great, you guessed %@" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Super, due hast %@ erraten!"
+            "value" : "Super, du hast %@ erraten!"
           }
         }
       }
@@ -230,7 +219,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erstes Mal Gespielt"
+            "value" : "Letztes Mal Gespielt"
           }
         }
       }
@@ -305,6 +294,16 @@
         }
       }
     },
+    "Show exclamation mark" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ausrufezeichen zeigen"
+          }
+        }
+      }
+    },
     "ß" : {
       "localizations" : {
         "de" : {
@@ -345,12 +344,12 @@
         }
       }
     },
-    "This app is inspired by the now-famous Wordle, developed by Josh Wardle and later bought by the New York Times.\n\nThe game's main goal is simple: Guess a word by trying six other words. You enter one letter per field, all fields in a row then make up your word. Your word has to be real and part of the same pool of words as the target word. So, if your word isn't being recognized as such, it doesn't meet one of those criteria. \n\nAfterward, the app evaluates your word: A green letter means it is located at the same spot in the target word, an orange letter means the target word does contain it, but not at that spot and a gray letter means it isn't in the target word at all. \n\nYou log your word in by pressing ⏎. You have six tries per target word or else you will lose your streak and the word will be revealed to you. " : {
+    "This app is inspired by the now-famous Wordle, developed by Josh Wardle and later bought by the New York Times.\n\nThe game's main goal is simple: Guess a word by trying six other words. You enter one letter per field, all fields in a row then make up your word. Your word has to be real.\n\nAfterward, the app evaluates your word: A green letter means it is located at the same spot in the target word, an orange letter means the target word does contain it, but not at that spot and a gray letter means it isn't in the target word at all. \n\nYou log your word in by pressing ⏎. You have six tries per target word or else you will lose your streak and the word will be revealed to you. " : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Diese App ist von Wordle inspiriert, einem bekannten Spiel des Entwicklers Josh Wardle, das 2022 von der New York Times gekauft wurde.\n\nDas Ziel des Spiels ist einfach: Errate ein Wort durch Ausprobieren anderer Wörter. Pro Feld gibst du dazu einen Buchstaben ein, zusammen ergibt eine Zeile dann dein Lösungswort. Deine Lösungswörter müssen echte Wörter sein und sich im selben Pool wie die Zielwörter befinden. Wenn ein Wort also nicht als solches erkannt wird, trifft eines dieser Kriterien nicht zu. \n\nDanach wertet die App dein Lösungswort aus: Ein grauer Hintergrund steht für Buchstaben, die im Zielwort nicht vorkommen. Ein gelber Hintergrund steht für Buchstaben, die im Zielwort an einer anderen Stelle vorkommen, als beim Lösungswort. Und ein grüner Hintergrund steht für Buchstaben, die im Zielwort an der gleichen Stelle vorkommen, wie beim Lösungswort. \n\nBestätigt wird ein Wort, indem du auf ⏎ drückst. Du hast sechs Versuche pro Lösungswort. \n\nViel Spaß!"
+            "value" : "Diese App ist von Wordle inspiriert, einem bekannten Spiel des Entwicklers Josh Wardle, das 2022 von der New York Times gekauft wurde.\n\nDas Ziel des Spiels ist einfach: Errate ein Wort durch Ausprobieren anderer Wörter. Pro Feld gibst du dazu einen Buchstaben ein, zusammen ergibt eine Zeile dann dein Lösungswort. Deine Lösungswörter müssen echte Wörter sein. \n\nDanach wertet die App dein Lösungswort aus: Ein grauer Hintergrund steht für Buchstaben, die im Zielwort nicht vorkommen. Ein gelber Hintergrund steht für Buchstaben, die im Zielwort an einer anderen Stelle vorkommen, als beim Lösungswort. Und ein grüner Hintergrund steht für Buchstaben, die im Zielwort an der gleichen Stelle vorkommen, wie beim Lösungswort. \n\nBestätigt wird ein Wort, indem du auf ⏎ drückst. Du hast sechs Versuche pro Lösungswort. \n\nViel Spaß!"
           }
         }
       }
@@ -361,6 +360,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mal Gespielt"
+          }
+        }
+      }
+    },
+    "Use serif font" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serifen verwenden"
           }
         }
       }

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct WordleGridView: View {
-    
     @ObservedObject public var gameState = GameState()
     
     var body: some View{

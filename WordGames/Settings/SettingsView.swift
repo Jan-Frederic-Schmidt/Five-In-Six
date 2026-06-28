@@ -12,7 +12,11 @@ import SwiftUI
 struct SettingsView: View {
     @AppStorage("languageIdentifier") var languageIdentifier = "auto"
     @AppStorage("colorScheme") var storedColorScheme = 0
+    @AppStorage("showExclamationmarkWhenDifferentiateWithoutColor") var showExclamationmarkWhenDifferentiateWithoutColor = false
+    @AppStorage("useSerifs") var useSerifs = true
+    
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.accessibilityDifferentiateWithoutColor) var accessibilityDifferentiateWithoutColor
     
     @State private var showAlert = false
     
@@ -27,6 +31,12 @@ struct SettingsView: View {
                 }
                 
                 Section{
+                    Toggle("Use serif font", isOn: $useSerifs)
+                    
+                    if accessibilityDifferentiateWithoutColor {
+                        Toggle("Show exclamation mark", isOn: $showExclamationmarkWhenDifferentiateWithoutColor)
+                    }
+                    
                     Picker(selection: $storedColorScheme){
                         ForEach(0..<3){
                             switch $0{
@@ -66,6 +76,15 @@ struct SettingsView: View {
                         Label("Delete All Data", systemImage: "trash")
                             .foregroundStyle(.red)
                     }
+                        .alert("Do you want to delete all your data?", isPresented: $showAlert) {
+                            Button("Delete", role: .destructive) {
+                                UserDefaults.standard.removeObject(forKey: "Statistic")
+                                stat.statistic = getStatistic()
+                            }
+                        } message: {
+                            Text("Warning: This action is irreversible")
+                        }
+                    
                 }
                 
                 Section {
@@ -77,17 +96,7 @@ struct SettingsView: View {
                 }
             }
             .foregroundStyle(.primary)
-            .scrollContentBackground(.hidden)
-            .background(colorScheme == .light ? .lightBackground : .darkBackground)
             .navigationTitle(LocalizedStringKey("Settings"))
-            .alert("Do you want to delete all your data?", isPresented: $showAlert) {
-                Button("Delete", role: .destructive) {
-                    UserDefaults.standard.removeObject(forKey: "Statistic")
-                    stat.statistic = getStatistic()
-                }
-            } message: {
-                Text("Warning: This action is irreversible")
-            }
         }
     }
 }

@@ -9,6 +9,10 @@ import Combine
 import SwiftUI
 
 struct WordleRowView: View {
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
+    
+    @AppStorage("showExclamationmarkWhenDifferentiateWithoutColor") var showExclamationmarkWhenDifferentiateWithoutColor = false
     
     @Binding var row: FieldRow
     @FocusState private var focusField: Int?
@@ -28,9 +32,21 @@ struct WordleRowView: View {
                     .autocorrectionDisabled()
                     .keyboardType(.asciiCapable)
                 //frame styling
-                    .frame(maxWidth: 80, maxHeight: 80)
+                    .frame(maxWidth: 100, maxHeight: 100)
                     .aspectRatio(1/1, contentMode: .fit)
-                    .glassEffect(.regular.tint(row.fields[number].color), in: .rect(cornerRadius: 10))
+//                    .glassEffect(.regular.tint(row.fields[number].color), in: .rect(cornerRadius: 10))
+                    .background (
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(row.fields[number].color)
+                            .stroke(colorScheme == .light ? .darkBackground : .secondary)
+                    )
+                    .overlay(alignment: .topTrailing) {
+                        useWhenDifferentiateWithoutColor(number)
+                            .font(.callout)
+                            .accessibilityHidden(true)
+                            .foregroundStyle(.white)
+                            .padding(3)
+                    }
                 //executing code
                     .disabled(row.locked)
                     .onReceive(Just(row.fields[number].guess)){ _ in oneCharacter(input: &row.fields[number].guess) }
@@ -53,6 +69,21 @@ struct WordleRowView: View {
         if input.count > 1{
             input = String(input.prefix(1))
         }
+    }
+    
+    func useWhenDifferentiateWithoutColor(_ number: Int) -> Image {
+        if differentiateWithoutColor {
+            let color = row.fields[number].color
+            if color == .green {
+                return Image(systemName: "checkmark.circle.fill")
+            } else if color == .orange {
+                return Image(systemName: "arrow.left.and.right.circle.fill")
+            } else if color == .gray && showExclamationmarkWhenDifferentiateWithoutColor {
+                return Image(systemName: "exclamationmark.circle.fill")
+            }
+        }
+        
+        return Image(decorative: "")
     }
 }
 

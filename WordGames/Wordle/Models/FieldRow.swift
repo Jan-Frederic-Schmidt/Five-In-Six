@@ -16,7 +16,7 @@ class FieldRow: Identifiable{
                 guess = guess.uppercased()
             }
         }
-        var color: Color? = nil
+        var color: Color = Color.white.opacity(0)
     }
     
     var id = UUID()
