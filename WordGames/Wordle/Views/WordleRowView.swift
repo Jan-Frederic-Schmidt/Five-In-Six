@@ -16,13 +16,13 @@ struct WordleRowView: View {
     
     @Binding var row: FieldRow
     @FocusState private var focusField: Int?
+    @State var rotationAmount = Angle.degrees(0.0)
     
-    let action: () -> Void
+    let action: (FieldRow) -> Bool
     
     var body: some View {
         HStack{
             ForEach(0..<5){number in
-                
                 TextField("", text: $row.fields[number].guess)
                 //text styling
                     .focused($focusField, equals: number)
@@ -34,7 +34,6 @@ struct WordleRowView: View {
                 //frame styling
                     .frame(maxWidth: 100, maxHeight: 100)
                     .aspectRatio(1/1, contentMode: .fit)
-//                    .glassEffect(.regular.tint(row.fields[number].color), in: .rect(cornerRadius: 10))
                     .background (
                         RoundedRectangle(cornerRadius: 10)
                             .fill(row.fields[number].color)
@@ -47,6 +46,7 @@ struct WordleRowView: View {
                             .foregroundStyle(.white)
                             .padding(3)
                     }
+                    .rotation3DEffect(rotationAmount, axis: (x: 1, y: 0, z: 0))
                 //executing code
                     .disabled(row.locked)
                     .onReceive(Just(row.fields[number].guess)){ _ in oneCharacter(input: &row.fields[number].guess) }
@@ -60,7 +60,13 @@ struct WordleRowView: View {
                             }
                         }
                     }
-                    .onSubmit(action)
+                    .onSubmit {
+                        if action(row) {
+                            withAnimation(.snappy) {
+                                rotationAmount += .degrees(360)
+                            }
+                        }
+                    }
             }
         }
     }

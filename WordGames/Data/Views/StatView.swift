@@ -5,12 +5,10 @@
 //  Created by Jan Schmidt on 5/1/26.
 //
 import Charts
+import TipKit
 import SwiftUI
 
 struct StatView: View {
-    
-    @State private var showingExplanation = false
-    
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @Environment(\.colorScheme) var colorScheme
     var backgroundColor: Color {
@@ -24,6 +22,8 @@ struct StatView: View {
         }
     }
     
+    @Environment(GameState.self) var gameState
+    
     var body: some View {
         NavigationStack{
             ZStack {
@@ -31,54 +31,39 @@ struct StatView: View {
                     .ignoresSafeArea()
                 ScrollView {
                     VStack(spacing: 20) {
-                        Group{
-                            if showingExplanation{
-                                ChartExplanationView()
-                            } else {
-                                Chart{
-                                    ForEach(1..<7, id: \.self){number in
-                                        BarMark(
-                                            x: .value("Number of Words who took that many guesses", stat.statistic.guessSpread[number]!),
-                                            y: .value("Number of Tries", String(number))
-                                        )
-                                        .annotation(position: .trailing) {
-                                            Text(stat.statistic.guessSpread[number]! != 0 ? String(stat.statistic.guessSpread[number]!) : "")
-                                        }
-                                        
+                        TipView(ChartTip())
+                        
+                        Chart{
+                            ForEach(1..<7, id: \.self){number in
+                                BarMark(
+                                    x: .value("Number of Words who took that many guesses", gameState.stat.guessSpread[number]!),
+                                    y: .value("Number of Tries", String(number))
+                                )
+                                .annotation(position: .trailing) {
+                                    Text(gameState.stat.guessSpread[number]! != 0 ? String(gameState.stat.guessSpread[number]!) : "")
                                     }
+                                        
                                 }
+                            }
+                                .padding()
                                 .chartYAxisLabel("Number of Rounds", alignment: .topLeading)
                                 .chartXAxisLabel("Number of Tries")
                                 .foregroundStyle(Color.accentColor)
-                            }
-                        }
-                        .frame(maxWidth: .infinity, minHeight: verticalSizeClass == .compact ? 250 : 400)
-                        .overlay(alignment: .topTrailing) {
-                            Button{
-                                withAnimation{
-                                    showingExplanation.toggle()
-                                }
-                            } label: {
-                                Image(systemName: showingExplanation ? "xmark" : "questionmark.circle")
-                            }
-                            .buttonStyle(.plain)
-                            .foregroundStyle(Color.accentColor)
-                        }
-                        .padding()
-                        .background(colorScheme == .light ? .white : .black)
-                        .clipShape(.rect(cornerRadius: 20))
-                        .shadow(radius: 5)
+                                .frame(maxWidth: .infinity, minHeight: verticalSizeClass == .compact ? 250 : 400)
+                                .background(colorScheme == .light ? .white : .black)
+                                .clipShape(.rect(cornerRadius: 20))
+                                .shadow(radius: 5)
                         
                         HStack {
-                            DataCard(data: "\(stat.statistic.timesPlayed)", description: "Times Played", color: .indigo, aspectRatio: 1/1, height: .infinity)
+                            DataCard(data: "\(gameState.stat.timesPlayed)", description: "Times Played", color: .indigo, aspectRatio: 1/1, height: .infinity)
                             
                             Spacer()
 
-                            DataCard(data: "\(stat.statistic.streak)", description: "Your Streak", color: .red, aspectRatio: 1/1, height: .infinity)
+                            DataCard(data: "\(gameState.stat.streak)", description: "Your Streak", color: .red, aspectRatio: 1/1, height: .infinity)
                         }
                         
                         DataCard(
-                            data: "\(stat.statistic.firstPlayed?.formatted(date: .long, time: .omitted) ?? String(localized: "Not played yet"))",
+                            data: "\(gameState.stat.firstPlayed?.formatted(date: .long, time: .omitted) ?? String(localized: "Not played yet"))",
                             description: "First Time Played",
                             color: .green,
                             aspectRatio: nil,
@@ -86,7 +71,7 @@ struct StatView: View {
                         )
                         
                         DataCard(
-                            data: "\(stat.statistic.lastPlayed?.formatted(date: .long, time: .omitted) ?? String(localized: "Not played yet"))",
+                            data: "\(gameState.stat.lastPlayed?.formatted(date: .long, time: .omitted) ?? String(localized: "Not played yet"))",
                             description: "Last Time Played",
                             color: .orange,
                             aspectRatio: nil,

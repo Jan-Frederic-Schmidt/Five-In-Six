@@ -8,7 +8,6 @@ import Combine
 import SwiftUI
 
 struct WordleView: View {
-    
     @Environment(\.colorScheme) var colorScheme
     var backgroundColor: Color {
         switch colorScheme {
@@ -20,8 +19,6 @@ struct WordleView: View {
             return Color.lightBackground
         }
     }
-    
-    @State private var wordleGrid = WordleGridView()
     
     var body: some View {
         NavigationStack{
@@ -36,17 +33,12 @@ struct WordleView: View {
                             .fontWeight(.black)
                             .padding(.top)
                         
-                        wordleGrid
+                        WordleGridView()
                     }
                     .padding(.horizontal, 20)
                     .frame(maxWidth: .infinity)
                 }
                 .scrollBounceBehavior(.basedOnSize)
-            }
-            .onAppear {
-                if wordleGrid.gameState.chosenWord.word.isEmpty {
-                    wordleGrid.gameState.chosenWord.word = wordleGrid.gameState.chosenWord.wordList.randomElement()!
-                }
             }
         }
     }

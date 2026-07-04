@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension Bundle{
-    func chooseWord(for name: String, language: String, withLenght length: Int) -> Set<String>{
+    func chooseWord(for name: String, language: String, withLenght length: Int) async -> Set<String> {
         if let wordlistURL = Bundle.main.url(forResource: "\(name)-\(language).txt", withExtension: nil){
             if let wordlist = try? String(contentsOf: wordlistURL, encoding: .utf8) {
                     
@@ -47,7 +47,7 @@ extension ShapeStyle where Self == Color{
     }
 }
 
-func getStatistic() -> Statistic{
+func getStatistic() -> Statistic {
     if let data = UserDefaults.standard.object(forKey: "Statistic"){
         if let object = try? JSONDecoder().decode(Statistic.self, from: data as! Data){
             return object
@@ -56,3 +56,4 @@ func getStatistic() -> Statistic{
     
     return Statistic()
 }
+

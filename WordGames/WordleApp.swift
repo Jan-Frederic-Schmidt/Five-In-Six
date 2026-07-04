@@ -4,6 +4,8 @@
 //
 //  Created by Jan Schmidt on 4/23/26.
 //
+
+import TipKit
 import SwiftUI
 
 @main
@@ -22,6 +24,8 @@ struct WordleApp: App {
         }
     }
     
+    @State private var gameState = GameState()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -29,7 +33,15 @@ struct WordleApp: App {
                 .fontDesign(useSerifs ? .serif : .default)
                 .dynamicTypeSize(...DynamicTypeSize.accessibility2)
         }
+        .environment(gameState)
     }
     
-    
+    init() {
+        do {
+            try Tips.resetDatastore()
+            try Tips.configure()
+        } catch {
+            print("Error: Unable to configure tips - \(error.localizedDescription)")
+        }
+    }
 }

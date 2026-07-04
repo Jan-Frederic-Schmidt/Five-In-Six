@@ -9,38 +9,41 @@ import Combine
 import Foundation
 import SwiftUI
 
-extension WordleGridView {
-    class GameState: ObservableObject {
-        @Published var chosenWord = ChosenWord()
-        @Published var rows = [FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow()]
+@Observable
+    class GameState {
+        var chosenWord = ChosenWord()
+        var rows = [FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow()]
+        var stat = getStatistic()
         
         var guesses = 0
         var isSolved = false
-        @Published var alreadyGuessed: Set<String> = Set([])
+         var alreadyGuessed: Set<String> = Set([])
         
         var alertTitle: LocalizedStringResource = ""
         var alertMessage: LocalizedStringResource = ""
         var alertAction = { }
         
         func resetGame(){
-            if stat.statistic.firstPlayed == nil{
-                stat.statistic.firstPlayed = .now
+            if stat.firstPlayed == nil{
+                stat.firstPlayed = .now
             }
-            stat.statistic.lastPlayed = .now
+            stat.lastPlayed = .now
             
-            if let data = try? JSONEncoder().encode(stat.statistic){
+            if let data = try? JSONEncoder().encode(stat){
                 UserDefaults.standard.set(data, forKey: "Statistic")
             } else {
                 fatalError("Couldn't save game")
             }
             
             rows = [FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow()]
-            chosenWord.chooseNewWord()
+            Task {
+                await chosenWord.chooseNewWord()
+            }
             guesses = 0
             alreadyGuessed = Set([])
         }
         
-        func checkWord(row: FieldRow){
+        func checkWord(row: FieldRow) -> Bool {
             if !row.fields.contains(where: {$0.guess == ""}){
                 if checkSpelling(row.makeRealWord()){
                     row.locked = true
@@ -49,8 +52,11 @@ extension WordleGridView {
                         alreadyGuessed.insert(char)
                     }
                     setAlert(row.isSolved)
+                    return true
                 }
             }
+            
+            return false
         }
         
         func setAlert(_ isCorrect: Bool) {
@@ -58,9 +64,9 @@ extension WordleGridView {
                 alertTitle = "Correct!"
                 alertMessage = "Great, you guessed \(chosenWord.word.localizedCapitalized)"
                 alertAction = {
-                    stat.statistic.streak += 1
-                    stat.statistic.timesPlayed += 1
-                    stat.statistic.guessSpread.updateValue(stat.statistic.guessSpread[self.guesses, default: 0 ] + 1, forKey: self.guesses)
+                    self.stat.streak += 1
+                    self.stat.timesPlayed += 1
+                    self.stat.guessSpread.updateValue(self.stat.guessSpread[self.guesses, default: 0 ] + 1, forKey: self.guesses)
                     self.resetGame()
                 }
                 
@@ -70,8 +76,8 @@ extension WordleGridView {
                     alertTitle = "Incorrect!"
                     alertMessage = "Alas, that was wrong. The word was \(chosenWord.word.localizedCapitalized)"
                     alertAction = {
-                        stat.statistic.streak = 0
-                        stat.statistic.timesPlayed += 1
+                        self.stat.streak = 0
+                        self.stat.timesPlayed += 1
                         self.resetGame()
                     }
                     
@@ -102,4 +108,3 @@ extension WordleGridView {
             return misspelledRange.location == NSNotFound
         }
     }
-}

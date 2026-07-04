@@ -18,6 +18,8 @@ struct SettingsView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.accessibilityDifferentiateWithoutColor) var accessibilityDifferentiateWithoutColor
     
+    @Environment(GameState.self) var gameState
+    
     @State private var showAlert = false
     
     var body: some View {
@@ -79,7 +81,7 @@ struct SettingsView: View {
                         .alert("Do you want to delete all your data?", isPresented: $showAlert) {
                             Button("Delete", role: .destructive) {
                                 UserDefaults.standard.removeObject(forKey: "Statistic")
-                                stat.statistic = getStatistic()
+                                gameState.stat = getStatistic()
                             }
                         } message: {
                             Text("Warning: This action is irreversible")

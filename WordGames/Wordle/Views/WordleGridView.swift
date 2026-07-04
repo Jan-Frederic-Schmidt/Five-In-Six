@@ -5,12 +5,16 @@
 //  Created by Jan Schmidt on 4/7/2026.
 //
 
+import TipKit
 import SwiftUI
 
 struct WordleGridView: View {
-    @ObservedObject public var gameState = GameState()
+    @Environment(GameState.self) var gameState
+    let shareTip = ShareTip()
     
     var body: some View{
+        @Bindable var gameState = gameState
+        
         VStack(spacing: 15) {
             
             Text("Already used letters: \n \(gameState.alreadyGuessed.sorted().joined(separator: " • "))")
@@ -20,7 +24,7 @@ struct WordleGridView: View {
             HStack {
                 Spacer()
                 
-                Text("Streak: \(stat.statistic.streak)")
+                Text("Streak: \(gameState.stat.streak)")
                 
                 Spacer()
             }
@@ -29,17 +33,15 @@ struct WordleGridView: View {
             
             VStack(spacing: 5){
                 ForEach($gameState.rows){$row in
-                    WordleRowView(row: $row) {
-                        gameState.checkWord(row: row)
-                    }
+                    WordleRowView(row: $row, action: gameState.checkWord)
                 }
                 .alert(gameState.alertTitle, isPresented: $gameState.isSolved) {
                     Button("Next round", action: gameState.alertAction)
                 } message: {
                     Text(gameState.alertMessage)
                 }
-                .onAppear {
-                    if !gameState.chosenWord.wordList.contains(gameState.chosenWord.word) {
+                .task {
+                    if await !gameState.chosenWord.wordList.contains(gameState.chosenWord.word) {
                         gameState.resetGame()
                     }
                 }
@@ -61,6 +63,10 @@ struct WordleGridView: View {
                 } label: {
                     Image(systemName: "square.and.arrow.up")
                 }
+                .onTapGesture {
+                    shareTip.invalidate(reason: .actionPerformed)
+                }
+                .popoverTip(shareTip)
             }
         }
     }

@@ -8,19 +8,21 @@
 import Foundation
 import SwiftUI
 
-class ChosenWord{
+class ChosenWord {
     
     @AppStorage("languageIdentifier") var languageIdentifier = "auto"
     
-     var wordList: Set<String> {
-        if languageIdentifier == "auto" {
-            if let languageCode = Locale.current.language.languageCode?.identifier {
-               return Bundle.main.chooseWord(for: "wordlist", language: languageCode, withLenght: 5)
+    var wordList: Set<String> {
+        get async {
+            if languageIdentifier == "auto" {
+                if let languageCode = Locale.current.language.languageCode?.identifier {
+                    return await Bundle.main.chooseWord(for: "wordlist", language: languageCode, withLenght: 5)
+                } else {
+                    return await Bundle.main.chooseWord(for: "wordlist", language: "en", withLenght: 5)
+                }
             } else {
-               return Bundle.main.chooseWord(for: "wordlist", language: "en", withLenght: 5)
+                return await Bundle.main.chooseWord(for: "wordlist", language: languageIdentifier, withLenght: 5)
             }
-        } else {
-           return Bundle.main.chooseWord(for: "wordlist", language: languageIdentifier, withLenght: 5)
         }
     }
     
@@ -30,17 +32,21 @@ class ChosenWord{
         }
     }
     
-    var characterList: Array<String>
+    var characterList = [String]()
     
     init() {
-        characterList = Array(word).convertToStrings()
+        Task {
+            await chooseNewWord()
+        }
     }
     
-    func chooseNewWord(){
-        var newWord = wordList.randomElement()!
+    func chooseNewWord() async {
+        var newWord = await wordList.randomElement()!
         while newWord == word{
-            newWord = wordList.randomElement()!
+            newWord = await wordList.randomElement()!
         }
+        
         word = newWord
+        characterList = Array(word).convertToStrings()
     }
 }
