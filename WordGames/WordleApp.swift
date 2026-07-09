@@ -5,8 +5,8 @@
 //  Created by Jan Schmidt on 4/23/26.
 //
 
-import TipKit
 import SwiftUI
+import TipKit
 
 @main
 struct WordleApp: App {
@@ -38,7 +38,6 @@ struct WordleApp: App {
     
     init() {
         do {
-            try Tips.resetDatastore()
             try Tips.configure()
         } catch {
             print("Error: Unable to configure tips - \(error.localizedDescription)")

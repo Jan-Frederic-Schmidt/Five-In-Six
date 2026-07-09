@@ -31,4 +31,30 @@ class Statistic: Codable {
         5: 0,
         6: 0
     ]
+    
+    static func load() throws -> Statistic {
+        let url = URL.documentsDirectory.appending(path: "statistic.json")
+        guard let data = try? Data(contentsOf: url) else { throw LoadingError.couldNotGetData }
+        guard let decodedStatistic = try? JSONDecoder().decode(Statistic.self, from: data) else { throw LoadingError.couldNotDecode }
+        return decodedStatistic
+    }
+    
+    enum LoadingError: Error {
+        case couldNotDecode, couldNotGetData
+    }
+    
+    enum SavingError: Error {
+        case couldNotEncode, couldNotSave
+    }
+    
+    static func save(_ stat: Statistic) throws {
+        guard let data = try? JSONEncoder().encode(stat) else { throw SavingError.couldNotEncode }
+        let url = URL.documentsDirectory.appending(path: "statistic.json")
+        
+        do {
+            try data.write(to: url, options: [.atomic, .completeFileProtection])
+        } catch {
+            throw SavingError.couldNotSave
+        }
+    }
 }

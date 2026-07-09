@@ -46,14 +46,3 @@ extension ShapeStyle where Self == Color{
         Color(red: 0.557, green: 0.471, blue: 0.341)
     }
 }
-
-func getStatistic() -> Statistic {
-    if let data = UserDefaults.standard.object(forKey: "Statistic"){
-        if let object = try? JSONDecoder().decode(Statistic.self, from: data as! Data){
-            return object
-        }
-    }
-    
-    return Statistic()
-}
-

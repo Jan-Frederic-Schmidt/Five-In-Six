@@ -24,6 +24,19 @@
         }
       }
     },
+    "%lldm%llds" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lldm%2$llds"
+          }
+        }
+      }
+    },
+    "^[%lld minute](inflect: true)" : {
+
+    },
     "About" : {
       "localizations" : {
         "de" : {
@@ -63,6 +76,12 @@
           }
         }
       }
+    },
+    "Choose a duration" : {
+
+    },
+    "Choose time" : {
+
     },
     "Correct!" : {
       "localizations" : {
@@ -319,6 +338,9 @@
           }
         }
       }
+    },
+    "START!" : {
+
     },
     "Statistics" : {
       "localizations" : {

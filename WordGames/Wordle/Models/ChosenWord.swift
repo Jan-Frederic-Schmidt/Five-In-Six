@@ -11,18 +11,21 @@ import SwiftUI
 class ChosenWord {
     
     @AppStorage("languageIdentifier") var languageIdentifier = "auto"
+    var languageCode: String {
+        if languageIdentifier == "auto" {
+            if let languageIdentifer = Locale.current.language.languageCode?.identifier {
+                 return languageIdentifer
+            } else {
+                 return "en"
+            }
+        } else {
+            return languageIdentifier
+        }
+    }
     
     var wordList: Set<String> {
         get async {
-            if languageIdentifier == "auto" {
-                if let languageCode = Locale.current.language.languageCode?.identifier {
-                    return await Bundle.main.chooseWord(for: "wordlist", language: languageCode, withLenght: 5)
-                } else {
-                    return await Bundle.main.chooseWord(for: "wordlist", language: "en", withLenght: 5)
-                }
-            } else {
-                return await Bundle.main.chooseWord(for: "wordlist", language: languageIdentifier, withLenght: 5)
-            }
+            return await Bundle.main.chooseWord(for: "wordlist", language: languageCode, withLenght: 5)
         }
     }
     

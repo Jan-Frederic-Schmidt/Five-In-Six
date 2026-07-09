@@ -13,15 +13,32 @@ import SwiftUI
     class GameState {
         var chosenWord = ChosenWord()
         var rows = [FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow()]
-        var stat = getStatistic()
+        var stat: Statistic
+        
+        var maxTime = 0 {
+            willSet {
+                if maxTime == 0 {
+                    resetGame()
+                }
+            }
+        }
+        var timerRunning = false
         
         var guesses = 0
         var isSolved = false
-         var alreadyGuessed: Set<String> = Set([])
+        var alreadyGuessed: Set<String> = Set([])
         
         var alertTitle: LocalizedStringResource = ""
         var alertMessage: LocalizedStringResource = ""
         var alertAction = { }
+        
+        init() {
+            do {
+                stat = try Statistic.load()
+            } catch {
+                stat = Statistic()
+            }
+        }
         
         func resetGame(){
             if stat.firstPlayed == nil{
@@ -29,10 +46,10 @@ import SwiftUI
             }
             stat.lastPlayed = .now
             
-            if let data = try? JSONEncoder().encode(stat){
-                UserDefaults.standard.set(data, forKey: "Statistic")
-            } else {
-                fatalError("Couldn't save game")
+            do {
+                try Statistic.save(stat)
+            } catch {
+                fatalError("Could not save statistic")
             }
             
             rows = [FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow()]
@@ -45,7 +62,7 @@ import SwiftUI
         
         func checkWord(row: FieldRow) -> Bool {
             if !row.fields.contains(where: {$0.guess == ""}){
-                if checkSpelling(row.makeRealWord()){
+                if SpellChecker.checkSpelling(row.makeRealWord(), in: chosenWord.languageCode){
                     row.locked = true
                     guesses += 1
                     for char in row.compareWords(chosenWord.characterList) {
@@ -59,7 +76,7 @@ import SwiftUI
             return false
         }
         
-        func setAlert(_ isCorrect: Bool) {
+        func setAlert(_ isCorrect: Bool, overwriteGuessCount: Bool = false) {
             if isCorrect {
                 alertTitle = "Correct!"
                 alertMessage = "Great, you guessed \(chosenWord.word.localizedCapitalized)"
@@ -67,12 +84,13 @@ import SwiftUI
                     self.stat.streak += 1
                     self.stat.timesPlayed += 1
                     self.stat.guessSpread.updateValue(self.stat.guessSpread[self.guesses, default: 0 ] + 1, forKey: self.guesses)
+                    self.timerRunning = false
                     self.resetGame()
                 }
                 
                 isSolved = true
             } else {
-                if guesses >= 6 {
+                if guesses >= 6 || overwriteGuessCount {
                     alertTitle = "Incorrect!"
                     alertMessage = "Alas, that was wrong. The word was \(chosenWord.word.localizedCapitalized)"
                     alertAction = {
@@ -86,25 +104,16 @@ import SwiftUI
             }
         }
         
-        func checkSpelling(_ rawWord: String) -> Bool {
-            let word = rawWord.capitalized
-            let checker = UITextChecker()
-            
-            let range = NSRange(location: 0, length: word.utf16.count)
-            
-            var language = ""
-            if chosenWord.languageIdentifier == "auto" {
-                if let languageIdentifer = Locale.current.language.languageCode?.identifier {
-                    language = languageIdentifer
+        func listenToTimer() {
+            if timerRunning {
+                if maxTime > 0 {
+                    maxTime -= 1
                 } else {
-                    language = "en"
+                    setAlert(false, overwriteGuessCount: true)
+                    timerRunning = false
+                    maxTime = 0
                 }
-            } else {
-                language = chosenWord.languageIdentifier
             }
-            
-            let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: language)
-            
-            return misspelledRange.location == NSNotFound
         }
     }
+

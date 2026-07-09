@@ -80,8 +80,8 @@ struct SettingsView: View {
                     }
                         .alert("Do you want to delete all your data?", isPresented: $showAlert) {
                             Button("Delete", role: .destructive) {
-                                UserDefaults.standard.removeObject(forKey: "Statistic")
-                                gameState.stat = getStatistic()
+                                gameState.stat = Statistic()
+                                gameState.resetGame()
                             }
                         } message: {
                             Text("Warning: This action is irreversible")
