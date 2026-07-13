@@ -34,6 +34,9 @@
         }
       }
     },
+    "%llds" : {
+
+    },
     "^[%lld minute](inflect: true)" : {
 
     },
@@ -76,6 +79,9 @@
           }
         }
       }
+    },
+    "Black List" : {
+
     },
     "Choose a duration" : {
 
@@ -133,6 +139,9 @@
         }
       }
     },
+    "Dismiss" : {
+
+    },
     "Do you want to delete all your data?" : {
       "localizations" : {
         "de" : {
@@ -142,6 +151,12 @@
           }
         }
       }
+    },
+    "Don't show again" : {
+
+    },
+    "Edit Black List" : {
+
     },
     "English" : {
       "localizations" : {
@@ -233,6 +248,9 @@
         }
       }
     },
+    "Items on Blacklist" : {
+
+    },
     "Last Time Played" : {
       "localizations" : {
         "de" : {
@@ -302,6 +320,9 @@
           }
         }
       }
+    },
+    "Pause timer" : {
+
     },
     "Settings" : {
       "localizations" : {
@@ -446,6 +467,7 @@
       }
     },
     "Your Streak" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

@@ -9,7 +9,7 @@ import Foundation
 
 @Observable
 class Statistic: Codable {
-    var lastPlayed: Date? = nil //Set when playing a game in resetGame function
+    var lastPlayed: Date? = nil // Set when playing a game in resetGame function
     var firstPlayed: Date? = nil // same as above, but only if it is nil
     
     var averageGuesses: Int {
@@ -20,8 +20,8 @@ class Statistic: Codable {
         return mostOftenGuessed?.value ?? 0
         
     } //calculated (but how?)
-    var streak = 0 //Set if a game was won if
-    var timesPlayed = 0 //added to in resetGame function
+    var streak = 0 //Set if a game was won
+    var timesPlayed = 0 // added to in resetGame function
     
     var guessSpread = [
         1: 0,
@@ -31,6 +31,11 @@ class Statistic: Codable {
         5: 0,
         6: 0
     ]
+    
+    var blacklist = [String]()
+    var blacklistCount: Int {
+        return blacklist.count
+    }
     
     static func load() throws -> Statistic {
         let url = URL.documentsDirectory.appending(path: "statistic.json")

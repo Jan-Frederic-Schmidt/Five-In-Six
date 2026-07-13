@@ -59,7 +59,7 @@ struct StatView: View {
                             
                             Spacer()
 
-                            DataCard(data: "\(gameState.stat.streak)", description: "Your Streak", color: .red, aspectRatio: 1/1, height: .infinity)
+                            DataCard(data: "\(BlackList.blacklist.count)", description: "Items on Blacklist", color: .red, aspectRatio: 1/1, height: .infinity)
                         }
                         
                         DataCard(

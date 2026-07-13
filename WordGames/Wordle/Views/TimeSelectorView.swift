@@ -32,7 +32,7 @@ struct TimeSelectorView: View {
                         
                         Spacer()
                     }
-                    .padding(5)
+                    .padding(10)
                     .background(.secondary, in: .capsule)
                 }
             }

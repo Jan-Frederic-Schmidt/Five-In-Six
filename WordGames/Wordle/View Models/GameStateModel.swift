@@ -23,6 +23,7 @@ import SwiftUI
             }
         }
         var timerRunning = false
+        var timerPaused = false
         
         var guesses = 0
         var isSolved = false
@@ -56,6 +57,7 @@ import SwiftUI
             Task {
                 await chosenWord.chooseNewWord()
             }
+            timerRunning = false
             guesses = 0
             alreadyGuessed = Set([])
         }
@@ -84,7 +86,6 @@ import SwiftUI
                     self.stat.streak += 1
                     self.stat.timesPlayed += 1
                     self.stat.guessSpread.updateValue(self.stat.guessSpread[self.guesses, default: 0 ] + 1, forKey: self.guesses)
-                    self.timerRunning = false
                     self.resetGame()
                 }
                 
@@ -104,8 +105,16 @@ import SwiftUI
             }
         }
         
+        func doNotShowAgain() {
+            BlackList.blacklist.append(chosenWord.word)
+            print("\(BlackList.blacklist) is on the Blacklist")
+            stat.streak = 0
+            stat.timesPlayed = 0
+            resetGame()
+        }
+        
         func listenToTimer() {
-            if timerRunning {
+            if timerRunning && !timerPaused {
                 if maxTime > 0 {
                     maxTime -= 1
                 } else {

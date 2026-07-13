@@ -19,11 +19,15 @@ struct WordleGridView: View {
                 }
                 .alert(gameState.alertTitle, isPresented: $gameState.isSolved) {
                     Button("Next round", action: gameState.alertAction)
+                    
+                    if gameState.guesses >= 6 {
+                        Button("Don't show again", action: gameState.doNotShowAgain)
+                    }
                 } message: {
                     Text(gameState.alertMessage)
                 }
                 .task {
-                    if await !gameState.chosenWord.wordList.contains(gameState.chosenWord.word) {
+                    if await !gameState.chosenWord.wordList.contains(gameState.chosenWord.word) && !gameState.chosenWord.word.isEmpty{
                         gameState.resetGame()
                     }
                 }

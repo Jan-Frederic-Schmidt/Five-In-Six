@@ -45,7 +45,7 @@ class ChosenWord {
     
     func chooseNewWord() async {
         var newWord = await wordList.randomElement()!
-        while newWord == word{
+        while newWord == word || BlackList.blacklist.contains(newWord) {
             newWord = await wordList.randomElement()!
         }
         

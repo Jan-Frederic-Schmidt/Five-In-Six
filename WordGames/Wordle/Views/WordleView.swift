@@ -81,15 +81,21 @@ struct WordleView: View {
                     let (m, s) = gameState.maxTime.quotientAndRemainder(dividingBy: 60)
                     
                     ToolbarItem(placement: .title) {
-                        Text("\(m)m\(s)s")
+                        Text(m != 0 ? "\(m)m\(s)s" : "\(s)s")
                     }
                 }
                 
                 ToolbarItemGroup(placement: .topBarTrailing) {
-                    Button("Choose time", systemImage: "stopwatch") {
-                        showingTimeSelector = true
+                    if !gameState.timerRunning {
+                        Button("Choose time", systemImage: "stopwatch") {
+                            showingTimeSelector = true
+                        }
+                        .disabled(gameState.timerRunning)
+                    } else {
+                        Button("Pause timer", systemImage: gameState.timerPaused ? "play.fill" : "pause.fill") {
+                            gameState.timerPaused.toggle()
+                        }
                     }
-                    .disabled(gameState.timerRunning)
                     
                     Button {
                         // share the wordle instance

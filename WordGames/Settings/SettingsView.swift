@@ -21,6 +21,7 @@ struct SettingsView: View {
     @Environment(GameState.self) var gameState
     
     @State private var showAlert = false
+    @State private var isShowingSheet = false
     
     var body: some View {
         NavigationStack{
@@ -72,16 +73,21 @@ struct SettingsView: View {
 //                                .font(.caption)
                     }
                     
-                    Button(role: .destructive){
+                    Button("Edit Black List", systemImage: "pencil") { isShowingSheet = true }
+                        .sheet(isPresented: $isShowingSheet, content: BlacklistView.init)
+                    
+                    Button("Delete All Data", systemImage: "trash", role: .destructive){
                         showAlert = true
-                    } label: {
-                        Label("Delete All Data", systemImage: "trash")
-                            .foregroundStyle(.red)
                     }
+                    .foregroundStyle(.red)
                         .alert("Do you want to delete all your data?", isPresented: $showAlert) {
                             Button("Delete", role: .destructive) {
                                 gameState.stat = Statistic()
-                                gameState.resetGame()
+                                do {
+                                    try Statistic.save(gameState.stat)
+                                } catch {
+                                    fatalError("Couldn't save statistic")
+                                }
                             }
                         } message: {
                             Text("Warning: This action is irreversible")
