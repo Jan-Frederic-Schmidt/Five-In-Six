@@ -48,7 +48,7 @@ struct TimeSelectorView: View {
             .font(.title3)
             .labelsHidden()
             .padding()
-            .background(.secondary, in: .rect(corners: .concentric, isUniform: true))
+            .background(.secondary, in: .rect(cornerRadius: 25))
             .padding()
         }
         
@@ -61,7 +61,7 @@ struct TimeSelectorView: View {
         .fontWeight(.black)
         .foregroundStyle(.white)
         .padding(.horizontal, 50)
-        .glassEffect(.regular.tint(.red), in: .capsule)
+        .buttonStyle(.borderedProminent).tint(.red)
         .padding()
     }
 }

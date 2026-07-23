@@ -10,10 +10,10 @@ import Foundation
 import SwiftUI
 
 @Observable
-    class GameState {
-        var chosenWord = ChosenWord()
-        var rows = [FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow()]
-        var stat: Statistic
+class GameState {
+    var chosenWord = ChosenWord()
+    var rows = [FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow()]
+    var stat: Statistic
         
         var maxTime = 0 {
             willSet {
@@ -22,6 +22,7 @@ import SwiftUI
                 }
             }
         }
+    
         var timerRunning = false
         var timerPaused = false
         
@@ -41,30 +42,9 @@ import SwiftUI
             }
         }
         
-        func resetGame(){
-            if stat.firstPlayed == nil{
-                stat.firstPlayed = .now
-            }
-            stat.lastPlayed = .now
-            
-            do {
-                try Statistic.save(stat)
-            } catch {
-                fatalError("Could not save statistic")
-            }
-            
-            rows = [FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow()]
-            Task {
-                await chosenWord.chooseNewWord()
-            }
-            timerRunning = false
-            guesses = 0
-            alreadyGuessed = Set([])
-        }
-        
         func checkWord(row: FieldRow) -> Bool {
             if !row.fields.contains(where: {$0.guess == ""}){
-                if SpellChecker.checkSpelling(row.makeRealWord(), in: chosenWord.languageCode){
+                if SpellChecker.checkSpelling(row.makeRealWord(), in: chosenWord.languageCode) {
                     row.locked = true
                     guesses += 1
                     for char in row.compareWords(chosenWord.characterList) {
@@ -85,7 +65,13 @@ import SwiftUI
                 alertAction = {
                     self.stat.streak += 1
                     self.stat.timesPlayed += 1
-                    self.stat.guessSpread.updateValue(self.stat.guessSpread[self.guesses, default: 0 ] + 1, forKey: self.guesses)
+                    
+                    // The following is necessary, as simply updating the value inside the stat.guessSpread dictionary doesn't cause the graph to reload
+                    var newGuessSpread = self.stat.guessSpread
+                    newGuessSpread[self.guesses, default: 0] += 1
+                    self.stat.guessSpread = newGuessSpread
+                    
+//                    self.stat.guessSpread[self.guesses, default: 0] += 1
                     self.resetGame()
                 }
                 
@@ -106,8 +92,8 @@ import SwiftUI
         }
         
         func doNotShowAgain() {
-            BlackList.blacklist.append(chosenWord.word)
-            print("\(BlackList.blacklist) is on the Blacklist")
+            BlackList.list.append(chosenWord.word)
+            print("\(BlackList.list) is on the Blacklist")
             stat.streak = 0
             stat.timesPlayed = 0
             resetGame()
@@ -124,5 +110,26 @@ import SwiftUI
                 }
             }
         }
+    
+    func resetGame(){
+        if stat.firstPlayed == nil{
+            stat.firstPlayed = .now
+        }
+        stat.lastPlayed = .now
+        
+        do {
+            try Statistic.save(stat)
+        } catch {
+            fatalError("Could not save statistic")
+        }
+        
+        rows = [FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow(), FieldRow()]
+        Task {
+            await chosenWord.chooseNewWord()
+        }
+        timerRunning = false
+        guesses = 0
+        alreadyGuessed = Set([])
     }
+}
 

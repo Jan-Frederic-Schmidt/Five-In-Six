@@ -83,6 +83,7 @@ struct SettingsView: View {
                         .alert("Do you want to delete all your data?", isPresented: $showAlert) {
                             Button("Delete", role: .destructive) {
                                 gameState.stat = Statistic()
+                                BlackList.list = []
                                 do {
                                     try Statistic.save(gameState.stat)
                                 } catch {

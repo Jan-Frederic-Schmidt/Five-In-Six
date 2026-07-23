@@ -61,6 +61,7 @@ struct WordleView: View {
                         
                         WordleGridView()
                             .onReceive(timer) { _ in gameState.listenToTimer() }
+                            .disabled(gameState.timerRunning && gameState.timerPaused)
                     }
                     .padding([.horizontal, .bottom], 20)
                     .frame(maxWidth: .infinity)
@@ -71,10 +72,9 @@ struct WordleView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: gameState.resetGame) {
                         Image(systemName: "arrow.trianglehead.counterclockwise")
-                            .foregroundStyle(.white)
+                            .foregroundStyle(.red)
                             .bold()
                     }
-                    .buttonStyle(.glassProminent).tint(.red)
                 }
                 
                 if gameState.timerRunning {

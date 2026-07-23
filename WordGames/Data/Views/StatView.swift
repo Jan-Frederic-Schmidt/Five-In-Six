@@ -24,6 +24,8 @@ struct StatView: View {
     
     @Environment(GameState.self) var gameState
     
+    @State private var temporaryWorkaroundID = UUID()
+    
     var body: some View {
         NavigationStack{
             ZStack {
@@ -45,6 +47,7 @@ struct StatView: View {
                                         
                                 }
                             }
+                                .id(temporaryWorkaroundID)
                                 .padding()
                                 .chartYAxisLabel("Number of Rounds", alignment: .topLeading)
                                 .chartXAxisLabel("Number of Tries")
@@ -59,7 +62,7 @@ struct StatView: View {
                             
                             Spacer()
 
-                            DataCard(data: "\(BlackList.blacklist.count)", description: "Items on Blacklist", color: .red, aspectRatio: 1/1, height: .infinity)
+                            DataCard(data: "\(BlackList.list.count)", description: "Items on Blacklist", color: .red, aspectRatio: 1/1, height: .infinity)
                         }
                         
                         DataCard(
@@ -85,38 +88,8 @@ struct StatView: View {
                 .navigationTitle(LocalizedStringKey("Statistics"))
             }
         }
-    }
-}
-
-struct DataCard: View {
-    struct clearDivider: View {
-        var body: some View {
-            Rectangle()
-                .fill(.white)
-                .frame(maxWidth: .infinity, maxHeight: 2)
+        .onChange(of: gameState.stat.guessSpread) {
+            temporaryWorkaroundID = UUID() // This is needed because otherwise the chart doesn't reload if the dict is changed. This is as of iOS 27 Beta 4, hopefully this changes in the future
         }
-    }
-    
-    let data: LocalizedStringKey
-    let description: LocalizedStringKey
-    let color: Color
-    let aspectRatio: CGFloat?
-    let height: CGFloat?
-    
-    var body: some View {
-        VStack {
-            Text(data)
-                .font(.largeTitle)
-                .fontWeight(.heavy)
-            clearDivider()
-            Text(description)
-        }
-        .foregroundStyle(.white)
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: height)
-        .aspectRatio(aspectRatio, contentMode: .fit)
-        .background(color)
-        .clipShape(.rect(cornerRadius: 20))
-        .shadow(radius: 5)
     }
 }

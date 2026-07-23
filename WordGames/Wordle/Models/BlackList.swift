@@ -8,10 +8,10 @@
 import Foundation
 
 struct BlackList: Codable {
-    static var blacklist = getBlacklist() {
+    static var list = getBlacklist() {
         didSet {
             do {
-                let encoded = try JSONEncoder().encode(blacklist)
+                let encoded = try JSONEncoder().encode(list)
                 UserDefaults.standard.set(encoded, forKey: "blacklist")
             } catch {
                 print("Couldn't save blacklist")

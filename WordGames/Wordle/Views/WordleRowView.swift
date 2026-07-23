@@ -38,6 +38,7 @@ struct WordleRowView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(row.fields[number].color)
                             .stroke(colorScheme == .light ? .darkBackground : .secondary)
+                            .rotation3DEffect(rotationAmount, axis: (x: 0, y: 1, z: 0))
                     )
                     .overlay(alignment: .topTrailing) {
                         useWhenDifferentiateWithoutColor(number)
@@ -46,24 +47,29 @@ struct WordleRowView: View {
                             .foregroundStyle(.white)
                             .padding(3)
                     }
-                    .rotation3DEffect(rotationAmount, axis: (x: 1, y: 0, z: 0))
                 //executing code
                     .disabled(row.locked)
                     .onReceive(Just(row.fields[number].guess)){ _ in oneCharacter(input: &row.fields[number].guess) }
                     .disabled(row.locked)
-                    .onChange(of: row.fields[number].guess) { _, newValue in
+                    .onChange(of: row.fields[number].guess) { oldValue, newValue in
                         if !newValue.isEmpty {
                             if focusField != nil {
                                 if focusField != 4 {
                                     focusField! += 1
                                 }
                             }
+                        } else if !oldValue.isEmpty && newValue.isEmpty {
+                            if focusField != nil {
+                                if focusField != 0 {
+                                    focusField! -= 1
+                                }
+                            }
                         }
                     }
                     .onSubmit {
                         if action(row) {
-                            withAnimation(.snappy) {
-                                rotationAmount += .degrees(360)
+                            withAnimation(.bouncy(duration: 1)) {
+                                rotationAmount += .degrees(180)
                             }
                         }
                     }
@@ -92,6 +98,7 @@ struct WordleRowView: View {
         return Image(decorative: "")
     }
 }
+
 
 //#Preview {
 //    WordleFieldView()

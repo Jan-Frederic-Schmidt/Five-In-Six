@@ -12,24 +12,29 @@ struct BlacklistView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(BlackList.blacklist, id: \.self) { item in
-                    Text(item.localizedCapitalized)
-                }
-                    .onDelete(perform: deleteItem)
-            }
-                .navigationTitle("Black List")
-                .toolbar {
-                    Button("Dismiss", systemImage: "xmark") {
-                        print("The black list currently contains: \(BlackList.blacklist)")
-                        dismiss()
+            Group {
+                if BlackList.list.isEmpty {
+                    ContentUnavailableView("No words in the black list", systemImage: "list.bullet.circle",description: Text("Blacklist a word by tapping \"Don't show again\" after a failed round."))
+                } else {
+                    List {
+                        ForEach(BlackList.list, id: \.self) { item in
+                            Text(item.localizedCapitalized)
+                        }
+                        .onDelete(perform: deleteItem)
                     }
+                    .navigationTitle("Black List")
                 }
+            }
+            .toolbar {
+                Button("Dismiss", systemImage: "xmark") {
+                    dismiss()
+                }
+            }
         }
     }
     
     func deleteItem(at offsets: IndexSet) {
-        BlackList.blacklist.remove(atOffsets: offsets)
+        BlackList.list.remove(atOffsets: offsets)
     }
 }
 

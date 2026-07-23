@@ -20,7 +20,7 @@ class Statistic: Codable {
         return mostOftenGuessed?.value ?? 0
         
     } //calculated (but how?)
-    var streak = 0 //Set if a game was won
+    var streak = 0 // Set if a game was won
     var timesPlayed = 0 // added to in resetGame function
     
     var guessSpread = [
@@ -31,11 +31,6 @@ class Statistic: Codable {
         5: 0,
         6: 0
     ]
-    
-    var blacklist = [String]()
-    var blacklistCount: Int {
-        return blacklist.count
-    }
     
     static func load() throws -> Statistic {
         let url = URL.documentsDirectory.appending(path: "statistic.json")
