@@ -53,7 +53,7 @@ struct StatView: View {
                                 .chartXAxisLabel("Number of Tries")
                                 .foregroundStyle(Color.accentColor)
                                 .frame(maxWidth: .infinity, minHeight: verticalSizeClass == .compact ? 250 : 400)
-                                .background(colorScheme == .light ? .white : .black)
+                                .background(colorScheme == .light ? .white : Color(red: 0.110, green: 0.110, blue: 0.118))
                                 .clipShape(.rect(cornerRadius: 20))
                                 .shadow(radius: 5)
                         

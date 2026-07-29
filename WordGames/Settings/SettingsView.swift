@@ -28,7 +28,6 @@ struct SettingsView: View {
             Form{
                 NavigationLink {
                     GameRulesView()
-                        .background(colorScheme == .light ? .lightBackground : .darkBackground)
                 } label: {
                     Label("Game Rules", systemImage: "text.page")
                 }
@@ -73,7 +72,7 @@ struct SettingsView: View {
 //                                .font(.caption)
                     }
                     
-                    Button("Edit Black List", systemImage: "pencil") { isShowingSheet = true }
+                    Button("Edit Black List", systemImage: "long.text.page.and.pencil") { isShowingSheet = true }
                         .sheet(isPresented: $isShowingSheet, content: BlacklistView.init)
                     
                     Button("Delete All Data", systemImage: "trash", role: .destructive){

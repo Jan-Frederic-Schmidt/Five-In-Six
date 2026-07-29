@@ -37,7 +37,6 @@ struct WordleView: View {
                     .ignoresSafeArea()
                 ScrollView{
                     VStack(spacing: 30){
-                        
                         Text("Wordle!")
                             .font(.system(size: 50))
                             .fontWeight(.black)
@@ -67,11 +66,15 @@ struct WordleView: View {
                     .frame(maxWidth: .infinity)
                 }
                 .scrollBounceBehavior(.basedOnSize)
+                .scrollDismissesKeyboard(.interactively)
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button(action: gameState.resetGame) {
-                        Image(systemName: "arrow.trianglehead.counterclockwise")
+                    Button {
+                        gameState.resetGame()
+                        gameState.stat.streak = 0
+                    } label: {
+                        Image(systemName: "arrow.counterclockwise")
                             .foregroundStyle(.red)
                             .bold()
                     }
@@ -87,7 +90,7 @@ struct WordleView: View {
                 
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     if !gameState.timerRunning {
-                        Button("Choose time", systemImage: "stopwatch") {
+                        Button("Choose duration", systemImage: "stopwatch") {
                             showingTimeSelector = true
                         }
                         .disabled(gameState.timerRunning)
@@ -97,20 +100,13 @@ struct WordleView: View {
                         }
                     }
                     
-                    Button {
-                        // share the wordle instance
-                    } label: {
-                        Image(systemName: "square.and.arrow.up")
-                    }
-                    .onTapGesture {
-                        shareTip.invalidate(reason: .actionPerformed)
-                    }
+                    ShareLink("Share this word", item: gameState.chosenWord.hexWord)
                     .popoverTip(shareTip)
                 }
             }
             .sheet(isPresented: $showingTimeSelector) {
                 TimeSelectorView(maxTime: $gameState.maxTime, useTimer: $gameState.timerRunning)
-                    .presentationDetents([.height(350)])
+                    .presentationDetents([.medium])
             }
         }
     }

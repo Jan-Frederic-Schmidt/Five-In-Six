@@ -15,41 +15,15 @@ struct TimeSelectorView: View {
     @Binding var useTimer: Bool
     
     var body: some View {
-        HStack {
-            VStack {
-                ForEach(times, id: \.self) { selectedTime in
-                    HStack {
-                        Button {
-                            internalTime = selectedTime * 60
-                        } label: {
-                            Text("^[\(selectedTime) minute](inflect: true)")
-                                .font(.title3.bold())
-                                .padding(.vertical, 5)
-                            
-                            Spacer()
-                        }
-                        .buttonStyle(.plain)
-                        
-                        Spacer()
-                    }
-                    .padding(10)
-                    .background(.secondary, in: .capsule)
-                }
-            }
-            .padding()
+        VStack {
+            TimeSelectorWheel(selection: $internalTime)
             
-            Picker("Choose a duration", selection: $internalTime) {
-                ForEach(1..<21) { number in
-                    Text("^[\(number) minute](inflect: true)")
-                        .tag(number * 60)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    TimeSelectorRecommendations(times: times, externalTime: $internalTime)
                 }
+                .padding(.horizontal)
             }
-            .pickerStyle(.wheel)
-            .font(.title3)
-            .labelsHidden()
-            .padding()
-            .background(.secondary, in: .rect(cornerRadius: 25))
-            .padding()
         }
         
         Button("START!") {
@@ -60,8 +34,43 @@ struct TimeSelectorView: View {
         .font(.largeTitle)
         .fontWeight(.black)
         .foregroundStyle(.white)
-        .padding(.horizontal, 50)
         .buttonStyle(.borderedProminent).tint(.red)
         .padding()
+    }
+}
+
+struct TimeSelectorWheel: View {
+    @Binding var selection: Int
+    
+    var body: some View {
+        Picker("Choose a duration", selection: $selection) {
+            ForEach(1..<21) { number in
+                Text("^[\(number) minute](inflect: true)")
+                    .tag(number * 60)
+            }
+        }
+        .pickerStyle(.wheel)
+        .font(.title3)
+        .labelsHidden()
+        .padding()
+        .background(.secondary, in: .rect(cornerRadius: 25))
+        .padding()
+    }
+}
+
+struct TimeSelectorRecommendations: View {
+    let times: Array<Int>
+    @Binding var externalTime: Int
+    
+    var body: some View {
+        ForEach(times, id: \.self) { selectedTime in
+                Button("^[\(selectedTime) minute](inflect: true)") {
+                    externalTime = selectedTime * 60
+                }
+                .font(.title3.bold())
+                .padding(.vertical, 5)
+                .buttonStyle(.bordered)
+                .foregroundStyle(.primary)
+            }
     }
 }

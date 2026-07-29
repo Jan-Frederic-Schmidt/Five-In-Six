@@ -17,7 +17,7 @@ struct ContentView: View {
             
             StatView()
                 .tabItem{
-                    Label("Statistics", systemImage: "chart.bar.yaxis")
+                    Label("Statistics", systemImage: "chart.bar.xaxis")
                 }
             
             SettingsView()

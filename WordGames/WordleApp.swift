@@ -32,6 +32,9 @@ struct WordleApp: App {
                 .preferredColorScheme(colorScheme)
                 .fontDesign(useSerifs ? .serif : .default)
                 .dynamicTypeSize(...DynamicTypeSize.accessibility2)
+                .task {
+                    await gameState.chosenWord.chooseNewWord()
+                }
         }
         .environment(gameState)
     }

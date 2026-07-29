@@ -52,14 +52,13 @@ struct WordleRowView: View {
                     .onReceive(Just(row.fields[number].guess)){ _ in oneCharacter(input: &row.fields[number].guess) }
                     .disabled(row.locked)
                     .onChange(of: row.fields[number].guess) { oldValue, newValue in
-                        if !newValue.isEmpty {
-                            if focusField != nil {
+                        if focusField != nil {
+                            if newValue.count >= 2 {
                                 if focusField != 4 {
+                                    row.fields[number + 1].guess = String(newValue.last!)
                                     focusField! += 1
                                 }
-                            }
-                        } else if !oldValue.isEmpty && newValue.isEmpty {
-                            if focusField != nil {
+                            } else if !oldValue.isEmpty && newValue.isEmpty {
                                 if focusField != 0 {
                                     focusField! -= 1
                                 }

@@ -21,7 +21,7 @@ struct WordleGridView: View {
                     Button("Next round", action: gameState.alertAction)
                     
                     if gameState.guesses >= 6 {
-                        Button("Don't show again", action: gameState.doNotShowAgain)
+                        Button("Don't use again", action: gameState.doNotShowAgain)
                     }
                 } message: {
                     Text(gameState.alertMessage)

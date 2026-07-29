@@ -27,7 +27,7 @@ extension Bundle{
 }
 
 extension Array<Character> {
-    func convertToStrings() -> Array<String>{
+    func convertToString() -> Array<String>{
         var newArray: Array<String> = []
         for i in self{
             newArray.append(String(i))
@@ -39,10 +39,10 @@ extension Array<Character> {
 
 extension ShapeStyle where Self == Color{
     static var lightBackground: Color {
-        Color(red: 0.969, green: 0.953, blue: 0.855)
+        Color(red: 0.949, green: 0.949, blue: 0.949)
     }
     
     static var darkBackground: Color {
-        Color(red: 0.557, green: 0.471, blue: 0.341)
+        Color(red: 0.000, green: 0.000, blue: 0.000)
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BlacklistView: View {
     @Environment(\.dismiss) var dismiss
+    @State private var searchText = ""
     
     var body: some View {
         NavigationStack {
@@ -17,12 +18,15 @@ struct BlacklistView: View {
                     ContentUnavailableView("No words in the black list", systemImage: "list.bullet.circle",description: Text("Blacklist a word by tapping \"Don't show again\" after a failed round."))
                 } else {
                     List {
-                        ForEach(BlackList.list, id: \.self) { item in
-                            Text(item.localizedCapitalized)
+                        ForEach(BlackList.list.sorted(), id: \.self) { word in
+                            if word.contains(searchText.uppercased()) || searchText.isEmpty{
+                                Text(word.localizedCapitalized)
+                            }
                         }
                         .onDelete(perform: deleteItem)
                     }
                     .navigationTitle("Black List")
+                    .searchable(text: $searchText, placement: .toolbarPrincipal)
                 }
             }
             .toolbar {

@@ -31,17 +31,16 @@ class ChosenWord {
     
     var word = "" {
         didSet{
-            characterList = Array(word).convertToStrings()
+            characterList = Array(word).convertToString()
+            
+            let data = word.data(using: .utf8)!
+            hexWord = data.map { String(format: "%02x", $0) }.joined()
         }
     }
+    
+    var hexWord = ""
     
     var characterList = [String]()
-    
-    init() {
-        Task {
-            await chooseNewWord()
-        }
-    }
     
     func chooseNewWord() async {
         var newWord = await wordList.randomElement()!
@@ -50,6 +49,5 @@ class ChosenWord {
         }
         
         word = newWord
-        characterList = Array(word).convertToStrings()
     }
 }

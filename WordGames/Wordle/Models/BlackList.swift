@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct BlackList: Codable {
+@Observable
+class BlackList: Codable {
     static var list = getBlacklist() {
         didSet {
             do {
