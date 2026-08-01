@@ -50,7 +50,6 @@ struct WordleRowView: View {
                 //executing code
                     .disabled(row.locked)
                     .onReceive(Just(row.fields[number].guess)){ _ in oneCharacter(input: &row.fields[number].guess) }
-                    .disabled(row.locked)
                     .onChange(of: row.fields[number].guess) { oldValue, newValue in
                         if focusField != nil {
                             if newValue.count >= 2 {

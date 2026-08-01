@@ -21,8 +21,9 @@ struct WordleView: View {
             return Color.lightBackground
         }
     }
-    
+
     @State private var showingTimeSelector = false
+    @State private var showingWordImportingScreen = false
     @Environment(GameState.self) var gameState
     let shareTip = ShareTip()
     
@@ -69,14 +70,14 @@ struct WordleView: View {
                 .scrollDismissesKeyboard(.interactively)
             }
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
+                ToolbarItemGroup(placement: .topBarLeading) {
+                    Button("Reset game", systemImage: "arrow.counterclockwise") {
                         gameState.resetGame()
                         gameState.stat.streak = 0
-                    } label: {
-                        Image(systemName: "arrow.counterclockwise")
-                            .foregroundStyle(.red)
-                            .bold()
+                    }
+                    
+                    Button("Import word from code", systemImage: "square.and.arrow.down") {
+                        showingWordImportingScreen = true
                     }
                 }
                 
@@ -93,7 +94,6 @@ struct WordleView: View {
                         Button("Choose duration", systemImage: "stopwatch") {
                             showingTimeSelector = true
                         }
-                        .disabled(gameState.timerRunning)
                     } else {
                         Button("Pause timer", systemImage: gameState.timerPaused ? "play.fill" : "pause.fill") {
                             gameState.timerPaused.toggle()
@@ -107,6 +107,10 @@ struct WordleView: View {
             .sheet(isPresented: $showingTimeSelector) {
                 TimeSelectorView(maxTime: $gameState.maxTime, useTimer: $gameState.timerRunning)
                     .presentationDetents([.medium])
+            }
+            .sheet(isPresented: $showingWordImportingScreen) {
+                WordImportingView()
+                    .presentationDetents([.height(250)])
             }
         }
     }

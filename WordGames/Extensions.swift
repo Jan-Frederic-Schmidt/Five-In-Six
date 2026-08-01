@@ -8,24 +8,6 @@
 import Foundation
 import SwiftUI
 
-extension Bundle{
-    func chooseWord(for name: String, language: String, withLenght length: Int) async -> Set<String> {
-        if let wordlistURL = Bundle.main.url(forResource: "\(name)-\(language).txt", withExtension: nil){
-            if let wordlist = try? String(contentsOf: wordlistURL, encoding: .utf8) {
-                    
-                let allWords = wordlist.components(separatedBy: .newlines)
-                    
-                return Set(allWords.filter { $0.count == length && !$0.localizedStandardContains("ß")})
-                    
-                } else {
-                    fatalError("Could not import list of words")
-                }
-            } else {
-                fatalError("Could not find list of words")
-            }
-        }
-}
-
 extension Array<Character> {
     func convertToString() -> Array<String>{
         var newArray: Array<String> = []
@@ -37,6 +19,16 @@ extension Array<Character> {
     }
 }
 
+extension View {
+    func systemSpecificBackground(_ color: Color?, in shape: some Shape = .rect, liquidGlassIsInteractive: Bool = false) -> some View {
+        if #available(iOS 26.0, *) {
+            return self.glassEffect(.regular.interactive(liquidGlassIsInteractive).tint(color), in: shape)
+        } else {
+            return self.background(color ?? .secondary, in: shape)
+        }
+    }
+}
+
 extension ShapeStyle where Self == Color{
     static var lightBackground: Color {
         Color(red: 0.949, green: 0.949, blue: 0.949)
@@ -44,5 +36,24 @@ extension ShapeStyle where Self == Color{
     
     static var darkBackground: Color {
         Color(red: 0.000, green: 0.000, blue: 0.000)
+    }
+}
+
+// Made with AI 
+extension Data {
+    init?(hexString: String) {
+        let len = hexString.count / 2
+        var data = Data(capacity: len)
+        for i in 0..<len {
+            let j = hexString.index(hexString.startIndex, offsetBy: i * 2)
+            let k = hexString.index(j, offsetBy: 2)
+            let bytes = hexString[j..<k]
+            if var num = UInt8(bytes, radix: 16) {
+                data.append(&num, count: 1)
+            } else {
+                return nil
+            }
+        }
+        self = data
     }
 }

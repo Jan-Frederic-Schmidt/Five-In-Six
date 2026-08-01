@@ -35,7 +35,7 @@ class FieldRow: Identifiable{
             }
         }
             
-            isSolved = mutableLetters.allSatisfy ({ $0 == nil })
+        isSolved = mutableLetters.allSatisfy ({ $0 == nil })
         
         for i in 0..<5 {
             if fields[i].color != .green {

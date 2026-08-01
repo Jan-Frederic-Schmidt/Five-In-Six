@@ -26,8 +26,8 @@ struct WordleGridView: View {
                 } message: {
                     Text(gameState.alertMessage)
                 }
-                .task {
-                    if await !gameState.chosenWord.wordList.contains(gameState.chosenWord.word) && !gameState.chosenWord.word.isEmpty{
+                .onAppear {
+                    if !gameState.wordList.list.contains(gameState.chosenWord.word) {
                         gameState.resetGame()
                     }
                 }

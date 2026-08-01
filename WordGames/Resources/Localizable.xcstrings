@@ -70,7 +70,11 @@
         }
       }
     },
+    "Alas, that was wrong. The word was \"%@\"" : {
+
+    },
     "Alas, that was wrong. The word was %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -242,6 +246,9 @@
         }
       }
     },
+    "Enter the code" : {
+
+    },
     "First Time Played" : {
       "localizations" : {
         "de" : {
@@ -302,7 +309,21 @@
         }
       }
     },
+    "Great, you guessed \"%@\"!" : {
+
+    },
+    "Great, you guessed \"%@\"! It took you %lld seconds!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Great, you guessed \"%1$@\"! It took you %2$lld seconds!"
+          }
+        }
+      }
+    },
     "Great, you guessed %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -311,6 +332,9 @@
           }
         }
       }
+    },
+    "Import word from code" : {
+
     },
     "Incorrect!" : {
       "localizations" : {
@@ -374,6 +398,9 @@
         }
       }
     },
+    "Not fast enough! The word was \"%@\"" : {
+
+    },
     "Not played yet" : {
       "localizations" : {
         "de" : {
@@ -423,6 +450,9 @@
           }
         }
       }
+    },
+    "Reset game" : {
+
     },
     "Settings" : {
       "localizations" : {

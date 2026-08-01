@@ -34,8 +34,8 @@ struct TimeSelectorView: View {
         .font(.largeTitle)
         .fontWeight(.black)
         .foregroundStyle(.white)
-        .buttonStyle(.borderedProminent).tint(.red)
         .padding()
+        .glassEffect(.regular.tint(.red).interactive(), in: .capsule)
     }
 }
 
