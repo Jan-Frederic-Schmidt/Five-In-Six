@@ -9,7 +9,6 @@ import Combine
 import SwiftUI
 
 struct WordleRowView: View {
-    @Environment(\.colorScheme) var colorScheme
     @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
     
     @AppStorage("showExclamationmarkWhenDifferentiateWithoutColor") var showExclamationmarkWhenDifferentiateWithoutColor = false
@@ -37,7 +36,7 @@ struct WordleRowView: View {
                     .background (
                         RoundedRectangle(cornerRadius: 10)
                             .fill(row.fields[number].color)
-                            .stroke(colorScheme == .light ? .darkBackground : .secondary)
+                            .stroke(.secondary)
                             .rotation3DEffect(rotationAmount, axis: (x: 0, y: 1, z: 0))
                     )
                     .overlay(alignment: .topTrailing) {

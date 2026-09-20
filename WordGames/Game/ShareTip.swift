@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ShareTip: Tip {
     var title: Text {
-        Text("Share current word with others")
+        Text("Share the current word with others")
     }
     
     var message: Text? {

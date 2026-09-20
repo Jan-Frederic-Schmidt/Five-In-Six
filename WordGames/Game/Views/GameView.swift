@@ -38,7 +38,7 @@ struct WordleView: View {
                     .ignoresSafeArea()
                 ScrollView{
                     VStack(spacing: 30){
-                        Text("Wordle!")
+                        Text("5in6!")
                             .font(.system(size: 50))
                             .fontWeight(.black)
                         
@@ -75,10 +75,12 @@ struct WordleView: View {
                         gameState.resetGame()
                         gameState.stat.streak = 0
                     }
+                        .disabled(gameState.timerRunning)
                     
                     Button("Import word from code", systemImage: "square.and.arrow.down") {
                         showingWordImportingScreen = true
                     }
+                        .disabled(gameState.timerRunning)
                 }
                 
                 if gameState.timerRunning {
@@ -101,7 +103,7 @@ struct WordleView: View {
                     }
                     
                     ShareLink("Share this word", item: gameState.chosenWord.hexWord)
-                    .popoverTip(shareTip)
+                        .popoverTip(shareTip)
                 }
             }
             .sheet(isPresented: $showingTimeSelector) {
@@ -110,7 +112,7 @@ struct WordleView: View {
             }
             .sheet(isPresented: $showingWordImportingScreen) {
                 WordImportingView()
-                    .presentationDetents([.height(250)])
+                    .presentationDetents([.height(200)])
             }
         }
     }

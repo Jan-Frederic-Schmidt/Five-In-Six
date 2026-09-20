@@ -24,32 +24,31 @@ struct WordImportingView: View {
                     .padding()
                     .glassEffect(.regular, in: .capsule)
                 
-                Image(systemName: functionResult.isReal ? "checkmark" : "xmark")
-                    .foregroundStyle(.white)
-                    .font(.title3)
-                    .padding()
-                    .glassEffect(.regular.tint(functionResult.isReal ? .green : .red), in: .circle)
-                    .contentTransition(
-                        .symbolEffect(.replace)
-                    )
-            }
-            
-            
-            Button("START!") {
-                if let string = functionResult.word {
-                    gameState.importWord(string)
-                    dismiss()
+                Button {
+                    switch functionResult.isReal {
+                    case true:
+                        if let string = functionResult.word {
+                            gameState.importWord(string)
+                            dismiss()
+                        }
+                    case false:
+                        dismiss()
+                    }
+                } label: {
+                    Image(systemName: functionResult.isReal ? "checkmark" : "xmark")
+                        .foregroundStyle(.white)
+                        .font(.title3)
+                        .padding()
+                        .glassEffect(.regular.tint(functionResult.isReal ? .green : .red), in: .circle)
+                        .contentTransition(
+                            .symbolEffect(.replace)
+                        )
                 }
+                .accessibilityHint(functionResult.isReal ? "Start playing!" : "Exit")
             }
-            .font(.largeTitle)
-            .fontWeight(.black)
-            .foregroundStyle(.white)
-            .padding()
-            .glassEffect(.regular.tint(.red).interactive(), in: .capsule)
-            .disabled(!functionResult.isReal)
         }
         .padding()
-        .frame(height: 250)
+        .frame(height: 200)
     }
     
     func checkIfImportIsRealWord() -> (isReal: Bool, word: String?) {
